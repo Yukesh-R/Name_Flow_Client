@@ -1,0 +1,25 @@
+<section>
+  <form [formGroup]="emailForm" (ngSubmit)="onEmailFormSubmit()">
+    <input type="text" formControlName="email" placeholder="Enter Your Email">
+    <button>SUBMIT</button>
+  </form>
+</section>
+
+<section *ngIf="showRegistrationForm">
+  <form [formGroup]="registrationForm" (ngSubmit)="onRegistrationFormSubmit()">
+    <input type="text" formControlName="firstName" placeholder="Enter Your FirstName">
+    <input type="text" formControlName="lastName" placeholder="Enter Your LastName">
+    <select formControlName="gender">
+      <option value="">None</option>
+      <option value="MALE">Male</option>
+      <option value="FEMALE">Female</option>
+    </select>
+    <input type="text" formControlName="age" placeholder="Enter Your Age">
+    <input type="text" formControlName="mobileNumber" placeholder="Enter Your MobileNumber">
+    <input type="text" formControlName="email" placeholder="Enter Your Email">
+    <input type="text" formControlName="password" placeholder="Enter Your Password">
+    <input type="text" formControlName="role" placeholder="Enter Your Role">
+    <input type="text" formControlName="activationCode" placeholder="Enter Your ActivationCode">
+    <button>Register</button>
+  </form>
+</section>
