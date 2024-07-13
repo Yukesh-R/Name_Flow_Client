@@ -5,11 +5,12 @@ import {ResponseModel} from "../../models/response.model";
 import {RegistrationRequestModel} from "../../models/registration-request.model";
 import {AuthenticationRequestModel} from "../../models/authentication-request.model";
 import {VerifyResetPasswordModel} from "../../models/verify-resetpassword.model";
+import {AuthenticationResponseModel} from "../../models/authentication-response.model";
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserServicesService {
+export class UserService {
 
   constructor(
     private httpClient : HttpClient,
@@ -29,8 +30,8 @@ export class UserServicesService {
   }
 
   public authenticate(authRequest : AuthenticationRequestModel)
-    : Observable<ResponseModel> {
-    return this.httpClient.post<ResponseModel>(`${this.baseUrl}/authentication`, authRequest);
+    : Observable<AuthenticationResponseModel> {
+    return this.httpClient.post<AuthenticationResponseModel>(`${this.baseUrl}/authentication`, authRequest);
   }
 
   public forgetPasswordMailSend(email : string)
