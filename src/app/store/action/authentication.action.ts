@@ -9,6 +9,7 @@ export const authenticationAction = createAction(
 export const authenticationSuccessAction = createAction(
   "authenticationSuccess",
   props<{
+    userId : number;
     firstName : string;
     lastName : string;
     gender : string;

@@ -1,5 +1,7 @@
 export interface AuthenticationResponseModel {
 
+  userId : number;
+
   firstName : string;
 
   lastName : string;
