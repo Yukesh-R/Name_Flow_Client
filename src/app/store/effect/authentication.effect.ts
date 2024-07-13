@@ -1,6 +1,5 @@
 import {Injectable} from "@angular/core";
 import {Actions, createEffect, ofType} from "@ngrx/effects";
-import {Router} from "express";
 import {UserService} from "../../services/userServices/user-services.service";
 import {
   authenticationAction,
@@ -15,11 +14,10 @@ export class AuthenticationEffect {
 
   constructor(
     private actions$ : Actions,
-    private router : Router,
     private userService : UserService
   ) { }
 
-  authenticationEffect = createEffect(() =>
+  authenticationEffect$ = createEffect(() =>
     this.actions$.pipe(
       ofType(authenticationAction),
       mergeMap((action) =>
