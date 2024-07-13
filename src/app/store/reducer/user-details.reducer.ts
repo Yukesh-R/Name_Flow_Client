@@ -18,6 +18,7 @@ const _userDetailsReducer = createReducer(userDetails,
   on(authenticationSuccessAction, (state, action) => {
     return {
       ...state,
+      userId : action.userId,
       firstName : action.firstName,
       lastName : action.lastName,
       gender : action.gender,

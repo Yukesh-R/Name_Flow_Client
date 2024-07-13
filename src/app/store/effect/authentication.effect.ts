@@ -29,6 +29,7 @@ export class AuthenticationEffect {
             if(authenticationResponseDTO!=null){
               sessionStorage.setItem("jwtToken", authenticationResponseDTO.jwtToken);
               return authenticationSuccessAction({
+                userId : authenticationResponseDTO.userId,
                 firstName : authenticationResponseDTO.firstName,
                 lastName : authenticationResponseDTO.lastName,
                 gender : authenticationResponseDTO.gender,
