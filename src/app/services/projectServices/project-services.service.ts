@@ -10,7 +10,7 @@ import {ProjectDataModel} from "../../models/project-data.model";
 @Injectable({
   providedIn: 'root'
 })
-export class ProjectServicesService {
+export class ProjectService {
 
   constructor(
     private httpClient : HttpClient
