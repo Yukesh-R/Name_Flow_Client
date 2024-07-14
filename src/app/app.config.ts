@@ -22,6 +22,6 @@ export const appConfig: ApplicationConfig = {
       AuthenticationEffect
     ]),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
-    provideAnimationsAsync()
+    provideAnimationsAsync(), provideAnimationsAsync()
 ]
 };

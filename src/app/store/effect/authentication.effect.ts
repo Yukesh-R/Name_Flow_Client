@@ -7,6 +7,7 @@ import {
   authenticationSuccessAction
 } from "../action/authentication.action";
 import {catchError, map, mergeMap, of} from "rxjs";
+import {Router} from "@angular/router";
 
 @Injectable()
 
@@ -14,7 +15,8 @@ export class AuthenticationEffect {
 
   constructor(
     private actions$ : Actions,
-    private userService : UserService
+    private userService : UserService,
+    private router : Router
   ) { }
 
   authenticationEffect$ = createEffect(() =>
@@ -26,6 +28,7 @@ export class AuthenticationEffect {
             console.log(authenticationResponseDTO);
             if(authenticationResponseDTO!=null){
               sessionStorage.setItem("jwtToken", authenticationResponseDTO.jwtToken);
+              this.router.navigate(['/home']).then(status => true);
               return authenticationSuccessAction({
                 userId : authenticationResponseDTO.userId,
                 firstName : authenticationResponseDTO.firstName,
