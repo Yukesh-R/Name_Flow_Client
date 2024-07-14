@@ -36,7 +36,7 @@ export class UserService {
 
   public forgetPasswordMailSend(email : string)
     : Observable<ResponseModel> {
-    return this.httpClient.get<ResponseModel>(`${this.baseUrl}/forget-password/${email}}`);
+    return this.httpClient.get<ResponseModel>(`${this.baseUrl}/forget-password/${email}`);
   }
 
   public verifyAndResetPassword(verifyResetPassword : VerifyResetPasswordModel)
