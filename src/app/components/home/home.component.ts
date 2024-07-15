@@ -1,59 +1,62 @@
-import {Component, OnInit} from '@angular/core';
-import {ProjectDataModel} from "../../models/project-data.model";
-import {ProjectService} from "../../services/projectServices/project-services.service";
-import {Store} from "@ngrx/store";
-import {AppState} from "../../store/state/app.state";
-import {userDetailsSelector} from "../../store/selector/user-details.selector";
-import {UserDetailsModel} from "../../models/user-details.model";
-import {MatDialog} from "@angular/material/dialog";
-import {CreateProjectDialogBoxComponent} from "../create-project-dialog-box/create-project-dialog-box.component";
-import {ProjectAccessDialogBoxComponent} from "../project-access-dialog-box/project-access-dialog-box.component";
-import {RouterLink} from "@angular/router";
 
+import { Component, OnInit } from '@angular/core';
+import { ProjectDataModel } from '../../models/project-data.model';
+import { ProjectService } from '../../services/projectServices/project-services.service';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../store/state/app.state';
+import { userDetailsSelector } from '../../store/selector/user-details.selector';
+import { UserDetailsModel } from '../../models/user-details.model';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateProjectDialogBoxComponent } from '../create-project-dialog-box/create-project-dialog-box.component';
+import { ProjectAccessDialogBoxComponent } from '../project-access-dialog-box/project-access-dialog-box.component';
+import { NgFor } from '@angular/common';
+import { Router } from '@angular/router';
+import {RouterLink} from "@angular/router";
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [
-    RouterLink
-  ],
+  imports: [NgFor,RouterLink],
+
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.css',
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit {
+  myProjects: ProjectDataModel[] = [];
 
-  myProjects : ProjectDataModel[] = [];
-
-  accessProjects : ProjectDataModel[] = [];
+  accessProjects: ProjectDataModel[] = [];
 
   constructor(
-    private projectService : ProjectService,
-    private store : Store<AppState>,
-    private dialog : MatDialog
-  ) {
-  }
+    private projectService: ProjectService,
+    private store: Store<AppState>,
+    private dialog: MatDialog,
+    private route: Router,
+  ) {}
 
   getProjectsRefresh() {
-    let userIdFromState : number=-1;
-    this.store.select(userDetailsSelector)
-      .subscribe((userDetails : UserDetailsModel) => {
-        userIdFromState=userDetails.userId;
-      })
+    let userIdFromState: number = -1;
+    this.store
+      .select(userDetailsSelector)
+      .subscribe((userDetails: UserDetailsModel) => {
+        userIdFromState = userDetails.userId;
+      });
     this.projectService.getOwnProjects(userIdFromState).subscribe({
-      next: (projectData : ProjectDataModel[] ) => {
-        this.myProjects=projectData;
+      next: (projectData: ProjectDataModel[]) => {
+        this.myProjects = projectData;
+        console.log(this.myProjects);
       },
-      error: (errorResponse : Error) => {
+      error: (errorResponse: Error) => {
         console.log(errorResponse);
-      }
-    })
+      },
+    });
     this.projectService.getAccessProject(userIdFromState).subscribe({
-      next: (projectData : ProjectDataModel[] ) => {
-        this.accessProjects=projectData;
+      next: (projectData: ProjectDataModel[]) => {
+        this.accessProjects = projectData;
+        console.log(this.accessProjects);
       },
-      error: (errorResponse : Error) => {
+      error: (errorResponse: Error) => {
         console.log(errorResponse);
-      }
-    })
+      },
+    });
   }
 
   ngOnInit() {
@@ -62,22 +65,34 @@ export class HomeComponent implements OnInit{
     console.log(this.accessProjects);
   }
 
-  onCreateNewProject(enterAnimationDuration: string, exitAnimationDuration: string) {
+  onCreateNewProject(
+    enterAnimationDuration: string,
+    exitAnimationDuration: string,
+  ) {
     this.dialog.open(CreateProjectDialogBoxComponent, {
-      width:"500px",
+      width: '500px',
       enterAnimationDuration,
       exitAnimationDuration,
-    })
+    });
     this.getProjectsRefresh();
   }
 
-  onAccessProject(index : number,enterAnimationDuration: string, exitAnimationDuration: string) {
+  onAccessProject(
+    index: number,
+    enterAnimationDuration: string,
+    exitAnimationDuration: string,
+  ) {
     this.dialog.open(ProjectAccessDialogBoxComponent, {
-      width:"500px",
-      data : this.myProjects[index].id,
+      width: '500px',
+      data: this.myProjects[index].id,
       enterAnimationDuration,
       exitAnimationDuration,
-    })
+    });
   }
 
+  viewProject(projectId: number) {
+    this.route.navigate(['/all-variables'], {
+      queryParams: { data: projectId },
+    });
+  }
 }

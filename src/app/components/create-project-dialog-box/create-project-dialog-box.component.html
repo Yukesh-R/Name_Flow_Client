@@ -1,11 +1,25 @@
 <form [formGroup]="createProjectForm">
-  <input type="text" placeholder="Enter Your Project Name"
-         formControlName="projectName">
-  <input type="text" placeholder="Enter Your Project Description"
-         formControlName="projectDescription">
-  <input type="text" placeholder="Enter Your TechStack"
-         formControlName="techStackDescription">
-  <input type="text" placeholder="Enter Your ProjectContributors"
-         formControlName="projectContributors">
-  <button (click)="onCreateProjectFormSubmit()"  mat-dialog-close>CREATE</button>
+
+  <input
+    type="text"
+    placeholder="Enter Your Project Name"
+    formControlName="projectName"
+  />
+  <input
+    type="text"
+    placeholder="Enter Your Project Description"
+    formControlName="projectDescription"
+  />
+  <input
+    type="text"
+    placeholder="Enter Your TechStack"
+    formControlName="techStackDescription"
+  />
+  <input
+    type="text"
+    placeholder="Enter Your ProjectContributors"
+    formControlName="projectContributors"
+  />
+  <button mat-dialog-close (click)="onCreateProjectFormSubmit()">CREATE</button>
+
 </form>

@@ -1,32 +1,37 @@
 <h1>Create an New Variable by yourself</h1>
 <form [formGroup]="createVariableManualForm">
   <input placeholder="Enter the Variable Name" />
-  <select ngModel="selectedDataType">
+  <select formControlName="dataTyoe">
     <option value="">Select the Data type</option>
     <option value="string">String</option>
     <option value="boolean">Boolean</option>
     <option value="number">Number</option>
     <option value="others">Other</option>
   </select>
-  <div *ngIf="isOtherDataTypeSelected">
-    <input ngModel="otherDataTypeSelected" placeholder="Enter the Data Type" />
-  </div>
+  <form [formGroup]="otherDataTypeSelectedForm">
+    <div *ngIf="isOtherDataTypeSelected">
+      <input placeholder="Enter the Data Type" formControlName="dataType" />
+    </div>
+  </form>
   <input
     placeholder="Enter the decription about the Variable"
     formControlName="decription"
   />
 
-  <select ngModel="selectedVarType">
+  <select formControlName="variableType">
     <option value="">Select the Variable type</option>
     <option value="class">Class</option>
     <option value="interface">Interface</option>
     <option value="function">Function</option>
     <option value="others">Other</option>
   </select>
-  <div *ngIf="isOtherVarTypeSelected">
-    <input
-      ngModel="otherVarTypeSelected"
-      placeholder="Enter the Variable Type"
-    />
-  </div>
+  <form [formGroup]="otherVarTypeSelectedForm">
+    <div *ngIf="isOtherVarTypeSelected">
+      <input
+        placeholder="Enter the Variable Type"
+        formControlName="variableType"
+      />
+    </div>
+  </form>
+  <button (click)="createVariableManual()">Create</button>
 </form>
