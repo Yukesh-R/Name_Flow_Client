@@ -8,11 +8,14 @@ import {UserDetailsModel} from "../../models/user-details.model";
 import {MatDialog} from "@angular/material/dialog";
 import {CreateProjectDialogBoxComponent} from "../create-project-dialog-box/create-project-dialog-box.component";
 import {ProjectAccessDialogBoxComponent} from "../project-access-dialog-box/project-access-dialog-box.component";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [
+    RouterLink
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -37,7 +40,9 @@ export class HomeComponent implements OnInit{
       })
     this.projectService.getOwnProjects(userIdFromState).subscribe({
       next: (projectData : ProjectDataModel[] ) => {
-        this.myProjects=projectData;
+        for(let i=0; i<projectData.length; i++) {
+          this.myProjects.push(projectData[i]);
+        }
       },
       error: (errorResponse : Error) => {
         console.log(errorResponse);
@@ -45,7 +50,9 @@ export class HomeComponent implements OnInit{
     })
     this.projectService.getAccessProject(userIdFromState).subscribe({
       next: (projectData : ProjectDataModel[] ) => {
-        this.accessProjects=projectData;
+        for(let i=0;i<projectData.length;i++){
+          this.accessProjects.push(projectData[i]);
+        }
       },
       error: (errorResponse : Error) => {
         console.log(errorResponse);
@@ -55,6 +62,8 @@ export class HomeComponent implements OnInit{
 
   ngOnInit() {
     this.getProjectsRefresh();
+    console.log(this.myProjects);
+    console.log(this.accessProjects);
   }
 
   onCreateNewProject(enterAnimationDuration: string, exitAnimationDuration: string) {
