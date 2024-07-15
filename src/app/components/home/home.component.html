@@ -1,5 +1,5 @@
-<button (click)="onCreateNewProject('800ms', '500ms')">Create Project</button>
-<button (click)="onAccessProject(1, '800ms', '500ms')">Provide Access</button>
+
+
 <div *ngFor="let project of myProjects; let i = index">
   <span>{{ i + 1 }}</span>
   <div>{{ project.projectName }}</div>
@@ -8,3 +8,12 @@
   <div>{{ project.projectContributors }}</div>
   <button (click)="viewProject(project.id)">View</button>
 </div>
+
+<button (click)="onCreateNewProject('800ms','500ms')">
+  Create Project
+</button>
+<button (click)="onAccessProject(1,'800ms','500ms')">
+  Provide Access
+</button>
+<p routerLink="/inbox">InBox</p>
+

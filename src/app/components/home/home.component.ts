@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { ProjectDataModel } from '../../models/project-data.model';
 import { ProjectService } from '../../services/projectServices/project-services.service';
@@ -10,10 +11,12 @@ import { CreateProjectDialogBoxComponent } from '../create-project-dialog-box/cr
 import { ProjectAccessDialogBoxComponent } from '../project-access-dialog-box/project-access-dialog-box.component';
 import { NgFor } from '@angular/common';
 import { Router } from '@angular/router';
+import {RouterLink} from "@angular/router";
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgFor],
+  imports: [NgFor,RouterLink],
+
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
@@ -58,6 +61,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.getProjectsRefresh();
+    console.log(this.myProjects);
+    console.log(this.accessProjects);
   }
 
   onCreateNewProject(
