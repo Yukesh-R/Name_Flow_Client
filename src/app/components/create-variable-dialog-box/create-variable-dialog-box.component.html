@@ -1,21 +1,23 @@
 <h1>Create New Variable by Us</h1>
 <form [formGroup]="createVariableAIForm">
-  <select ngModel="selectedDataType" (change)="onOptionChange()">
+  <select (change)="isOtherDataTypeCheck()" formControlName="dataType">
     <option value="">Select the Data Type</option>
     <option value="string">String</option>
     <option value="boolean">Boolean</option>
     <option value="number">Number</option>
     <option value="others">Other</option>
   </select>
-  <input
-    *ngIf="isOtherDataTypeSelected"
-    placeholder="Enter the Data Type"
-    ngModel="otherDataTypeSelected"
-    type="text"
-  />
+  <form [formGroup]="otherDataTypeSelectedForm">
+    <input
+      *ngIf="isOtherDataTypeSelected"
+      placeholder="Enter the Data Type"
+      type="text"
+      formControlName="otherDataTypeSelected"
+    />
+  </form>
   <input formControlName="description" placeholder="Provide some details" />
 
-  <select ngModel="selectedVarType" (change)="onVarTypeOptionChange()">
+  <select (change)="isOtherVarTypeCheck()" formControlName="variableType">
     <option value="">Select the Type of your Variable</option>
     <option value="class">Class</option>
     <option value="interface">Interface</option>
@@ -23,11 +25,13 @@
     <option value="variable">Variable</option>
     <option value="others">Other</option>
   </select>
-  <input
-    *ngIf="isOtherVarTypeSelected"
-    placeholder="Enter the type of your Variable"
-    ngModel="otherVarTypeSelected"
-    type="text"
-  />
+  <form [formGroup]="otherVarTypeSelectedForm">
+    <input
+      *ngIf="isOtherVarTypeSelected"
+      placeholder="Enter the type of your Variable"
+      type="text"
+      formControlName="otherVarTypeSelected"
+    />
+  </form>
   <button (click)="createVariableAI()">Create</button>
 </form>

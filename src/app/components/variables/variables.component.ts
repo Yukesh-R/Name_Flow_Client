@@ -13,7 +13,6 @@ import { DeleteVariableDialogBoxComponent } from '../delete-variable-dialog-box/
 import { CreateVariableManualDialogBoxComponent } from '../create-variable-manual-dialog-box/create-variable-manual-dialog-box.component';
 import { NgForOf } from '@angular/common';
 
-
 @Component({
   selector: 'app-variables',
   standalone: true,
@@ -57,7 +56,7 @@ export class VariablesComponent implements OnInit {
   }
 
   createVariableAI() {
-    this.dialog.open(CreateVariableDialogBoxComponent, {
+    const dialogRef = this.dialog.open(CreateVariableDialogBoxComponent, {
       data: {
         userId: this.userId,
         projectId: this.projectId,
