@@ -40,9 +40,7 @@ export class HomeComponent implements OnInit{
       })
     this.projectService.getOwnProjects(userIdFromState).subscribe({
       next: (projectData : ProjectDataModel[] ) => {
-        for(let i=0; i<projectData.length; i++) {
-          this.myProjects.push(projectData[i]);
-        }
+        this.myProjects=projectData;
       },
       error: (errorResponse : Error) => {
         console.log(errorResponse);
@@ -50,9 +48,7 @@ export class HomeComponent implements OnInit{
     })
     this.projectService.getAccessProject(userIdFromState).subscribe({
       next: (projectData : ProjectDataModel[] ) => {
-        for(let i=0;i<projectData.length;i++){
-          this.accessProjects.push(projectData[i]);
-        }
+        this.accessProjects=projectData;
       },
       error: (errorResponse : Error) => {
         console.log(errorResponse);
