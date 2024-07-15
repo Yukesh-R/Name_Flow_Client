@@ -11,11 +11,13 @@ import { CreateVariableDialogBoxComponent } from '../create-variable-dialog-box/
 import { UpdateVariableDialogBoxComponent } from '../update-variable-dialog-box/update-variable-dialog-box.component';
 import { DeleteVariableDialogBoxComponent } from '../delete-variable-dialog-box/delete-variable-dialog-box.component';
 import { CreateVariableManualDialogBoxComponent } from '../create-variable-manual-dialog-box/create-variable-manual-dialog-box.component';
+import { NgForOf } from '@angular/common';
+
 
 @Component({
   selector: 'app-variables',
   standalone: true,
-  imports: [],
+  imports: [NgForOf],
   templateUrl: './variables.component.html',
   styleUrl: './variables.component.css',
 })

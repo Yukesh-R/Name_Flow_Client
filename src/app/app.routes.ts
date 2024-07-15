@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { VariablesComponent } from './components/variables/variables.component';
 import {AuthenticationComponent} from "./components/authentication/authentication.component";
 import {RegistrationComponent} from "./components/registration/registration.component";
 import {ForgetPasswordComponent} from "./components/forget-password/forget-password.component";
@@ -11,4 +12,8 @@ export const routes: Routes = [
   {path : 'forget-password',component : ForgetPasswordComponent},
   {path : 'home',component:HomeComponent},
   {path : 'inbox',component:InboxComponent},
+  {
+    path: 'all-variables',
+    component: VariablesComponent,
+  }
 ];

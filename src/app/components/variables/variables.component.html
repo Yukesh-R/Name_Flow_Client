@@ -1,1 +1,10 @@
-<p>variables works!</p>
+<h1>All Variables</h1>
+<div *ngFor="let variable of allVariables; let i = index">
+  <span>{{ i + 1 }}</span>
+  <div>{{ variable.variableName }}</div>
+  <div>{{ variable.dataType }}</div>
+  <div>{{ variable.description }}</div>
+  <div>{{ variable.variableType }}</div>
+  <button (click)="updateVariable(i)">Edit Variable</button>
+  <button (click)="deleteVariable(i)">Delete Variable</button>
+</div>
