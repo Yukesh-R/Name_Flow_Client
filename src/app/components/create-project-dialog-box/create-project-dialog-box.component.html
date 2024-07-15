@@ -1,4 +1,4 @@
-<form [formGroup]="createProjectForm" (ngSubmit)="onCreateProjectFormSubmit()">
+<form [formGroup]="createProjectForm">
   <input type="text" placeholder="Enter Your Project Name"
          formControlName="projectName">
   <input type="text" placeholder="Enter Your Project Description"
@@ -7,5 +7,5 @@
          formControlName="techStackDescription">
   <input type="text" placeholder="Enter Your ProjectContributors"
          formControlName="projectContributors">
-  <button mat-dialog-close>CREATE</button>
+  <button (click)="onCreateProjectFormSubmit()"  mat-dialog-close>CREATE</button>
 </form>
