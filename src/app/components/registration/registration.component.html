@@ -1,25 +1,90 @@
 <section>
   <form [formGroup]="emailForm" (ngSubmit)="onEmailFormSubmit()">
-    <input type="text" formControlName="email" placeholder="Enter Your Email">
+    <input type="text" formControlName="email" placeholder="Enter Your Email" />
+    <div
+      *ngIf="
+        emailForm.controls['email'].invalid &&
+        isSubmittedEmailForm &&
+        emailForm.touched
+      "
+    >
+      Invalid User Email
+    </div>
     <button>SUBMIT</button>
   </form>
 </section>
 
 <section *ngIf="showRegistrationForm">
   <form [formGroup]="registrationForm" (ngSubmit)="onRegistrationFormSubmit()">
-    <input type="text" formControlName="firstName" placeholder="Enter Your FirstName">
-    <input type="text" formControlName="lastName" placeholder="Enter Your LastName">
+    <input
+      type="text"
+      formControlName="firstName"
+      placeholder="Enter Your FirstName"
+    />
+    <input
+      type="text"
+      formControlName="lastName"
+      placeholder="Enter Your LastName"
+    />
     <select formControlName="gender">
       <option value="">None</option>
       <option value="MALE">Male</option>
       <option value="FEMALE">Female</option>
     </select>
-    <input type="text" formControlName="age" placeholder="Enter Your Age">
-    <input type="text" formControlName="mobileNumber" placeholder="Enter Your MobileNumber">
-    <input type="text" formControlName="email" placeholder="Enter Your Email">
-    <input type="text" formControlName="password" placeholder="Enter Your Password">
-    <input type="text" formControlName="role" placeholder="Enter Your Role">
-    <input type="text" formControlName="activationCode" placeholder="Enter Your ActivationCode">
+    <div
+      *ngIf="
+        registrationForm.controls['gender'].invalid &&
+        isSubmittedRegistrationForm &&
+        registrationForm.touched
+      "
+    ></div>
+    <input type="text" formControlName="age" placeholder="Enter Your Age" />
+    <div
+      *ngIf="
+        registrationForm.controls['age'].invalid &&
+        isSubmittedRegistrationForm &&
+        registrationForm.touched
+      "
+    >
+      Select an Valid Gender
+    </div>
+    <input
+      type="text"
+      formControlName="mobileNumber"
+      placeholder="Enter Your MobileNumber"
+    />
+    <input type="text" formControlName="email" placeholder="Enter Your Email" />
+    <input
+      type="text"
+      formControlName="password"
+      placeholder="Enter Your Password"
+    />
+
+    <div
+      *ngIf="
+        registrationForm.controls['password'].invalid &&
+        isSubmittedRegistrationForm &&
+        registrationForm.touched
+      "
+    >
+      Password should have an minimum length of 6
+    </div>
+
+    <input type="text" formControlName="role" placeholder="Enter Your Role" />
+    <input
+      type="text"
+      formControlName="activationCode"
+      placeholder="Enter Your ActivationCode"
+    />
+    <div
+      *ngIf="
+        registrationForm.controls['activationCode'].invalid &&
+        isSubmittedRegistrationForm &&
+        registrationForm.touched
+      "
+    >
+      Invalid ActivationCode
+    </div>
     <button>Register</button>
   </form>
 </section>
