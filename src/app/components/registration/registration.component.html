@@ -1,3 +1,4 @@
+
 <div class="flex flex-col space-y-1 my-6 md:my-12">
   <p class="text-xl font-bold text-center font-poppins">Create an Account with Us</p>
 
@@ -41,12 +42,22 @@
              class="border-gray-400 border-2 px-2 py-2 rounded-lg hover:border-gray-500 font-poppins
            text-xs md:py-4 md:px-4"
       >
+      <div
+      *ngIf="
+        emailForm.controls['email'].invalid &&
+        isSubmittedEmailForm &&
+        emailForm.touched
+      "
+    >
+      Invalid User Email
+    </div>
     </div>
     <button
       class="bg-[#5779F1] text-white w-[80%] h-[20%] rounded-lg py-2 font-poppins font-semibold
   hover:opacity-[90%] md:py-3">
       Send Activation Email
     </button>
+
   </form>
 
 </section>
@@ -106,6 +117,13 @@
         <option value="MALE">Male</option>
         <option value="FEMALE">Female</option>
       </select>
+      <div
+      *ngIf="
+        registrationForm.controls['gender'].invalid &&
+        isSubmittedRegistrationForm &&
+        registrationForm.touched
+      "
+    >Select an Valid Gender</div>
     </div>
 
     <div class="flex flex-col w-[80%] space-y-1">
@@ -116,6 +134,15 @@
            class="border-gray-400 border-2 px-2 py-2 rounded-lg hover:border-gray-500 font-poppins
            text-xs md:py-4 md:px-4"
       >
+      <div
+      *ngIf="
+        registrationForm.controls['age'].invalid &&
+        isSubmittedRegistrationForm &&
+        registrationForm.touched
+      "
+    >
+      Select an Valid Age
+    </div>
     </div>
 
     <div class="flex flex-col w-[80%] space-y-1">
@@ -136,6 +163,15 @@
            class="border-gray-400 border-2 px-2 py-2 rounded-lg hover:border-gray-500 font-poppins
            text-xs md:py-4 md:px-4"
       >
+      <div
+      *ngIf="
+        registrationForm.controls['password'].invalid &&
+        isSubmittedRegistrationForm &&
+        registrationForm.touched
+      "
+    >
+      Password should have an minimum length of 6
+    </div>
     </div>
 
     <div class="flex flex-col w-[80%] space-y-1">
@@ -156,12 +192,22 @@
            class="border-gray-400 border-2 px-2 py-2 rounded-lg hover:border-gray-500 font-poppins
            text-xs md:py-4 md:px-4"
       >
+      <div
+      *ngIf="
+        registrationForm.controls['activationCode'].invalid &&
+        isSubmittedRegistrationForm &&
+        registrationForm.touched
+      "
+    >
+      Invalid ActivationCode
+    </div>
     </div>
     <button
       class="bg-[#5779F1] text-white w-[80%] h-[20%] rounded-lg py-2 font-poppins font-semibold
   hover:opacity-[90%]">
       Register
     </button>
+
   </form>
 </section>
 
