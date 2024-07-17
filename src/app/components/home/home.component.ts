@@ -100,4 +100,5 @@ export class HomeComponent implements OnInit {
     localStorage.clear();
     this.route.navigate(['/']);
   }
+
 }

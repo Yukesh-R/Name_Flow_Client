@@ -5,11 +5,17 @@
       <th>S.No</th>
       <th>AccessProviderName</th>
       <th>AccessProjectName</th>
+      <th>Accept</th>
     </tr>
     </thead>
     <tbody>
-    <tr>
-
+    <tr *ngFor="let access of accessProvidersList; let i=index">
+      <td>{{i+1}}</td>
+      <td>{{access.accessProviderName}}</td>
+      <td>{{access.accessProjectName}}</td>
+      <td>
+        <button (click)="onAccessAccept(i)">Accept</button>
+      </td>
     </tr>
     </tbody>
   </table>

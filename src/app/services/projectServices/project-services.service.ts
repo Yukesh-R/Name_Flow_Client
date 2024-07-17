@@ -7,6 +7,7 @@ import {CreateRelationshipModel} from "../../models/create-relationship.model";
 import {RemoveProjectAccessModel} from "../../models/remove-project-access.model";
 import {ProjectDataModel} from "../../models/project-data.model";
 import {AccessProviderModel} from "../../models/access-provider.model";
+import {AccessAcceptModel} from "../../models/access-accept.model";
 
 @Injectable({
   providedIn: 'root'
@@ -36,9 +37,9 @@ export class ProjectService {
     return this.httpClient.get<AccessProviderModel[]>(`${this.baseUrl}/access-providers/${used_id}`);
   }
 
-  public relationAccessAcceptance(accepted_used_id : number)
+  public relationAccessAcceptance(accessAccept : AccessAcceptModel)
     : Observable<ResponseModel> {
-    return this.httpClient.get<ResponseModel>(`${this.baseUrl}/create/accept-access/${accepted_used_id}`);
+    return this.httpClient.post<ResponseModel>(`${this.baseUrl}/project-accept-access`,accessAccept);
   }
 
   public getOwnProjects(user_id : number)

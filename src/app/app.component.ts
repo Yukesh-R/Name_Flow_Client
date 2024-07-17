@@ -7,8 +7,9 @@ import { userDetails } from './store/state/details.state';
   standalone: true,
   imports: [RouterOutlet, RouterModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  styleUrls: ['./app.component.css'],
 })
+
 export class AppComponent implements OnInit {
   title = 'Name_Flow_Client';
   ngOnInit(): void {
@@ -23,4 +24,5 @@ export class AppComponent implements OnInit {
       console.warn('localStorageis not available.');
     }
   }
+
 }
