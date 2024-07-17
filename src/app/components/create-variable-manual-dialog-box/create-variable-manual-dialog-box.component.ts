@@ -27,13 +27,8 @@ export class CreateVariableManualDialogBoxComponent implements OnInit {
   userId!: number;
   projectId!: number;
 
-  selectedDataType: string = '';
   isOtherDataTypeSelected: boolean = false;
-  otherDataTypeSelected!: string;
-
-  selectedVarType: string = '';
   isOtherVarTypeSelected: boolean = false;
-  otherVarTypeSelected!: string;
 
   constructor(private variableNameService: VariableNameService) {}
 
@@ -44,7 +39,17 @@ export class CreateVariableManualDialogBoxComponent implements OnInit {
 
   createVariableManualForm: FormGroup = new FormGroup({
     variableName: new FormControl('', [Validators.required]),
+    dataType: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
+    variableType: new FormControl('', [Validators.required]),
+  });
+
+  otherDataTypeSelectedForm: FormGroup = new FormGroup({
+    dataType: new FormControl('', [Validators.required]),
+  });
+
+  otherVarTypeSelectedForm: FormGroup = new FormGroup({
+    variableType: new FormControl('', [Validators.required]),
   });
 
   createVariableManual() {
@@ -56,6 +61,16 @@ export class CreateVariableManualDialogBoxComponent implements OnInit {
       description: this.createVariableManualForm.value.description,
       variableType: this.createVariableManualForm.value.variableType,
     };
+
+    if (createVariableManualModel.dataType == 'others') {
+      createVariableManualModel.dataType =
+        this.otherDataTypeSelectedForm.value.dataType;
+    }
+
+    if (createVariableManualModel.variableType == 'others') {
+      createVariableManualModel.variableType =
+        this.otherVarTypeSelectedForm.value.variableType;
+    }
 
     this.variableNameService
       .createVariableManual(createVariableManualModel)
@@ -71,5 +86,21 @@ export class CreateVariableManualDialogBoxComponent implements OnInit {
 
   closeDialog() {
     this.dialogRef.close();
+  }
+
+  isOtherDataTypeSelectedCheck() {
+    if (this.createVariableManualForm.value.dataType == 'others') {
+      this.isOtherDataTypeSelected = true;
+    } else {
+      this.isOtherDataTypeSelected = false;
+    }
+  }
+
+  isOtherVarTypeSelectedCheck() {
+    if (this.createVariableManualForm.value.variableType == 'others') {
+      this.isOtherVarTypeSelected = true;
+    } else {
+      this.isOtherVarTypeSelected = false;
+    }
   }
 }

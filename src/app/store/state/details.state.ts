@@ -9,5 +9,6 @@ export const userDetails : UserDetailsModel = {
   mobileNumber : "",
   email : "",
   role : "",
-  errorMessage : ""
+  errorMessage : "",
+  jwtToken : ""
 }

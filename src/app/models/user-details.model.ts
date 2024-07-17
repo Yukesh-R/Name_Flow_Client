@@ -18,4 +18,6 @@ export interface UserDetailsModel {
 
   errorMessage : string;
 
+  jwtToken:string
+
 }

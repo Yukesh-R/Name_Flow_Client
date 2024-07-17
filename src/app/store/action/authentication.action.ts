@@ -17,6 +17,7 @@ export const authenticationSuccessAction = createAction(
     mobileNumber : string;
     email : string;
     role : string;
+    jwtToken:string;
   }>()
 );
 

@@ -13,7 +13,6 @@ import { DeleteVariableDialogBoxComponent } from '../delete-variable-dialog-box/
 import { CreateVariableManualDialogBoxComponent } from '../create-variable-manual-dialog-box/create-variable-manual-dialog-box.component';
 import { NgForOf } from '@angular/common';
 
-
 @Component({
   selector: 'app-variables',
   standalone: true,
@@ -57,7 +56,7 @@ export class VariablesComponent implements OnInit {
   }
 
   createVariableAI() {
-    this.dialog.open(CreateVariableDialogBoxComponent, {
+    const dialogRef = this.dialog.open(CreateVariableDialogBoxComponent, {
       data: {
         userId: this.userId,
         projectId: this.projectId,
@@ -93,25 +92,28 @@ export class VariablesComponent implements OnInit {
   }
 
   updateVariable(index: number) {
+    console.log(this.allVariables[index]);
     this.dialog.open(UpdateVariableDialogBoxComponent, {
       data: {
         userId: this.userId,
         projectId: this.projectId,
         variableId: this.allVariables[index].id,
+        variableName: this.allVariables[index].variableName,
         dataType: this.allVariables[index].dataType,
         description: this.allVariables[index].description,
         variableType: this.allVariables[index].variableType,
       },
+
       width: '80%',
     });
   }
 
-  deleteVariable(variableId: number) {
+  deleteVariable(index: number) {
     this.dialog.open(DeleteVariableDialogBoxComponent, {
       data: {
         userId: this.userId,
         projectId: this.projectId,
-        variableId: variableId,
+        variableId: this.allVariables[index].id,
       },
     });
   }

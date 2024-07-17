@@ -5,6 +5,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {
   FormControl,
   FormGroup,
+  FormsModule,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
@@ -16,7 +17,7 @@ import { CommonModule, NgIf } from '@angular/common';
 @Component({
   selector: 'app-create-variable-dialog-box',
   standalone: true,
-  imports: [ReactiveFormsModule, NgIf, CommonModule],
+  imports: [ReactiveFormsModule, NgIf, CommonModule, FormsModule],
   templateUrl: './create-variable-dialog-box.component.html',
   styleUrl: './create-variable-dialog-box.component.css',
 })
@@ -27,13 +28,8 @@ export class CreateVariableDialogBoxComponent implements OnInit {
   userId!: number;
   projectId!: number;
 
-  selectedDataType: string = '';
   isOtherDataTypeSelected: boolean = false;
-  otherDataTypeSelected!: string;
-
-  selectedVarType: string = '';
   isOtherVarTypeSelected: boolean = false;
-  otherVarTypeSelected!: string;
   constructor(private variableNameService: VariableNameService) {}
 
   ngOnInit(): void {
@@ -46,6 +42,14 @@ export class CreateVariableDialogBoxComponent implements OnInit {
     variableType: new FormControl('', [Validators.required]),
   });
 
+  otherVarTypeSelectedForm: FormGroup = new FormGroup({
+    otherVarTypeSelected: new FormControl('', [Validators.required]),
+  });
+
+  otherDataTypeSelectedForm: FormGroup = new FormGroup({
+    otherDataTypeSelected: new FormControl('', [Validators.required]),
+  });
+
   createVariableAI() {
     let createVariableAIModel: CreateVariableRequestModel = {
       userId: this.userId,
@@ -55,16 +59,14 @@ export class CreateVariableDialogBoxComponent implements OnInit {
       variableType: this.createVariableAIForm.value.variableType,
     };
 
-    if (this.isOtherDataTypeSelected == true) {
-      createVariableAIModel.dataType = this.otherDataTypeSelected;
-    } else {
-      createVariableAIModel.dataType = this.selectedDataType;
+    if (createVariableAIModel.dataType == 'others') {
+      createVariableAIModel.dataType =
+        this.otherDataTypeSelectedForm.value.otherDataTypeSelected;
     }
 
-    if (this.isOtherVarTypeSelected == true) {
-      createVariableAIModel.variableType = this.otherVarTypeSelected;
-    } else {
-      createVariableAIModel.variableType = this.selectedVarType;
+    if (createVariableAIModel.variableType == 'others') {
+      createVariableAIModel.variableType =
+        this.otherVarTypeSelectedForm.value.otherVarTypeSelected;
     }
 
     this.variableNameService.createVariableAI(createVariableAIModel).subscribe({
@@ -77,15 +79,23 @@ export class CreateVariableDialogBoxComponent implements OnInit {
     });
   }
 
-  onOptionChange(): void {
-    this.isOtherDataTypeSelected = this.selectedDataType === 'others';
-  }
-
-  onVarTypeOptionChange(): void {
-    this.isOtherVarTypeSelected = this.selectedDataType === 'others';
-  }
-
   closeDialog() {
     this.dialogRef.close();
+  }
+
+  isOtherVarTypeCheck() {
+    if (this.createVariableAIForm.value.variableType == 'others') {
+      this.isOtherVarTypeSelected = true;
+    } else {
+      this.isOtherVarTypeSelected = false;
+    }
+  }
+
+  isOtherDataTypeCheck() {
+    if (this.createVariableAIForm.value.dataType == 'others') {
+      this.isOtherDataTypeSelected = true;
+    } else {
+      this.isOtherDataTypeSelected = false;
+    }
   }
 }
