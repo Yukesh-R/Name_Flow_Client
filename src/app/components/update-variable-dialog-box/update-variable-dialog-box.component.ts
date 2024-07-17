@@ -31,7 +31,7 @@ export class UpdateVariableDialogBoxComponent implements OnInit {
   ngOnInit(): void {
     this.userId = this.data.userId;
     this.projectId = this.data.projectId;
-    this.variableId - this.data.variableId;
+    this.variableId = this.data.variableId;
     this.updateVariableForm.setValue({
       variableName: this.data.variableName,
       dataType: this.data.dataType,
@@ -49,14 +49,16 @@ export class UpdateVariableDialogBoxComponent implements OnInit {
 
   updateVariable() {
     let updateVariableModel: UpdateVariableModel = {
-      userId: this.updateVariableForm.value.userId,
-      projectId: this.updateVariableForm.value.projectId,
-      variableId: this.updateVariableForm.value.variableId,
+      userId: this.userId,
+      projectId: this.projectId,
+      variableId: this.variableId,
       variableName: this.updateVariableForm.value.variableName,
       dataType: this.updateVariableForm.value.dataType,
       description: this.updateVariableForm.value.description,
       variableType: this.updateVariableForm.value.variableType,
     };
+
+    console.log(updateVariableModel, 'from method');
 
     this.variableNameService.updateVariable(updateVariableModel).subscribe({
       next: (data: ResponseModel) => {

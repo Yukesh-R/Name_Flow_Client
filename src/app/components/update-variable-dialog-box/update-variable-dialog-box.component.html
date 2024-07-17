@@ -1,1 +1,20 @@
-<p>update-variable-dialog-box works!</p>
+<form [formGroup]="updateVariableForm">
+  <input
+    formControlName="variableName"
+    placeholder="Enter your New Variable Name"
+  />
+  <input
+    formControlName="dataType"
+    placeholder="Enter the Data Type of the Variable"
+  />
+  <input
+    formControlName="description"
+    placeholder="Provide Some Details About it"
+  />
+  <input
+    formControlName="variableType"
+    placeholder="Enter the Type of this Variable"
+  />
+  <button (click)="updateVariable()">Update</button>
+  <button (click)="closeDialog()">Cancel</button>
+</form>
