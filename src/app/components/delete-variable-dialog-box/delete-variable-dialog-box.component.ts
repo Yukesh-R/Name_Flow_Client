@@ -13,10 +13,6 @@ import { ResponseModel } from '../../models/response.model';
   styleUrl: './delete-variable-dialog-box.component.css',
 })
 export class DeleteVariableDialogBoxComponent implements OnInit {
-  userId!: number;
-  projectId!: number;
-  variableId!: number;
-
   ngOnInit(): void {}
 
   constructor(private variableNameService: VariableNameService) {}
@@ -26,10 +22,11 @@ export class DeleteVariableDialogBoxComponent implements OnInit {
   readonly variableDetails = model(this.data);
 
   deleteVariable() {
+    console.log(this.data);
     let deleteVariableModel: DeleteVariableModel = {
-      userId: this.userId,
-      projectId: this.projectId,
-      variableId: this.variableId,
+      userId: this.data.userId,
+      projectId: this.data.projectId,
+      variableId: this.data.variableId,
     };
     this.variableNameService.deleteVariable(deleteVariableModel).subscribe({
       next: (response: ResponseModel) => {
