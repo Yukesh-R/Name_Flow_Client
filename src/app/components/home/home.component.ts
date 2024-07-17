@@ -1,8 +1,7 @@
-
 import { Component, OnInit } from '@angular/core';
 import { ProjectDataModel } from '../../models/project-data.model';
 import { ProjectService } from '../../services/projectServices/project-services.service';
-import { Store } from '@ngrx/store';
+import { Store, StoreModule } from '@ngrx/store';
 import { AppState } from '../../store/state/app.state';
 import { userDetailsSelector } from '../../store/selector/user-details.selector';
 import { UserDetailsModel } from '../../models/user-details.model';
@@ -11,11 +10,12 @@ import { CreateProjectDialogBoxComponent } from '../create-project-dialog-box/cr
 import { ProjectAccessDialogBoxComponent } from '../project-access-dialog-box/project-access-dialog-box.component';
 import { NgFor } from '@angular/common';
 import { Router } from '@angular/router';
-import {RouterLink} from "@angular/router";
+import { RouterLink } from '@angular/router';
+
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgFor,RouterLink],
+  imports: [NgFor, RouterLink],
 
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
@@ -94,5 +94,10 @@ export class HomeComponent implements OnInit {
     this.route.navigate(['/all-variables'], {
       queryParams: { data: projectId },
     });
+  }
+
+  onLogout() {
+    localStorage.clear();
+    this.route.navigate(['/']);
   }
 }
