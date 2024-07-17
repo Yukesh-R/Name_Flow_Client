@@ -93,20 +93,20 @@ export class RegistrationComponent {
         activationCode: this.registrationForm.value.activationCode!,
       };
 
-      this.userService.verifyActivationCode(registrationRequest)
-        .subscribe(
-          {
-            next : (response) => {
-              if(response.status){
-                console.log(response);
-              }else{
-                console.log(response.message);
-              }
-            },
-            error: (errorResponse) => {
-              console.log(errorResponse);
-            },
-          });
+    this.userService.verifyActivationCode(registrationRequest)
+      .subscribe(
+        {
+          next : (response) => {
+            if(response.status){
+              console.log(response);
+            }else{
+              console.log(response.message);
+            }
+        },
+        error: (errorResponse) => {
+          console.log(errorResponse);
+        },
+      });
     }
   }
 }
