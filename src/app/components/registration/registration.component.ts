@@ -5,15 +5,14 @@ import {RegistrationRequestModel} from "../../models/registration-request.model"
 import {NgIf} from "@angular/common";
 import {RouterLink} from "@angular/router";
 
-
 @Component({
   selector: 'app-registration',
   standalone: true,
-    imports: [
-        ReactiveFormsModule,
-        NgIf,
-        RouterLink
-    ],
+  imports: [
+    ReactiveFormsModule,
+    NgIf,
+    RouterLink
+  ],
 
   templateUrl: './registration.component.html',
   styleUrl: './registration.component.css',
@@ -93,9 +92,6 @@ export class RegistrationComponent {
         role: this.registrationForm.value.role!,
         activationCode: this.registrationForm.value.activationCode!,
       };
-
-
-    
 
     this.userService.verifyActivationCode(registrationRequest)
       .subscribe(
