@@ -1,18 +1,20 @@
 import { Component } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import { UserService } from '../../services/userServices/user-services.service';
-import { RegistrationRequestModel } from '../../models/registration-request.model';
-import { NgIf } from '@angular/common';
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {UserService} from "../../services/userServices/user-services.service";
+import {RegistrationRequestModel} from "../../models/registration-request.model";
+import {NgIf} from "@angular/common";
+import {RouterLink} from "@angular/router";
+
 
 @Component({
   selector: 'app-registration',
   standalone: true,
-  imports: [ReactiveFormsModule, NgIf],
+    imports: [
+        ReactiveFormsModule,
+        NgIf,
+        RouterLink
+    ],
+
   templateUrl: './registration.component.html',
   styleUrl: './registration.component.css',
 })
@@ -93,13 +95,28 @@ export class RegistrationComponent {
         activationCode: this.registrationForm.value.activationCode!,
       };
 
-      this.userService.verifyActivationCode(registrationRequest).subscribe({
-        next: (response) => {
-          if (response.status) {
-            console.log(response);
-          } else {
-            console.log(response.message);
-          }
+
+    let registrationRequest : RegistrationRequestModel = {
+      firstName : this.registrationForm.value.firstName!,
+      lastName : this.registrationForm.value.lastName!,
+      gender : this.registrationForm.value.gender!,
+      age : this.registrationForm.value.age!,
+      mobileNumber : this.registrationForm.value.mobileNumber!,
+      email : this.emailForm.value.email!,
+      password : this.registrationForm.value.password!,
+      role : this.registrationForm.value.role!,
+      activationCode : this.registrationForm.value.activationCode!,
+    }
+
+    this.userService.verifyActivationCode(registrationRequest)
+      .subscribe(
+        {
+          next : (response) => {
+            if(response.status){
+              console.log(response);
+            }else{
+              console.log(response.message);
+            }
         },
         error: (errorResponse) => {
           console.log(errorResponse);
