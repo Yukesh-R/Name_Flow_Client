@@ -20,6 +20,7 @@
       *ngIf="
         loginForm.controls['email'].invalid && loginForm.touched && isSubmitted
       "
+      class="text-red-500 font-poppins"
     >
       Invalid UserEmail
     </div>
@@ -40,6 +41,7 @@
         loginForm.touched &&
         isSubmitted
       "
+      class="text-red-500 font-poppins"
     >
       Password should have an Minimum length of 6
     </div>
