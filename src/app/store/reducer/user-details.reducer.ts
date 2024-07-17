@@ -25,8 +25,10 @@ const _userDetailsReducer = createReducer(userDetails,
       age : action.age,
       mobileNumber : action.mobileNumber,
       email : action.email,
-      role : action.role
+      role : action.role,
+      jwtToken:action.jwtToken
     }
+
   }),
 
   on(authenticationFailAction, (state, action) => {
