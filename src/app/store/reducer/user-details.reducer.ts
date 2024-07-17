@@ -34,7 +34,7 @@ const _userDetailsReducer = createReducer(userDetails,
       ...state,
       errorMessage : action.errorMessage
     }
-  })
+  }),
 
 )
 

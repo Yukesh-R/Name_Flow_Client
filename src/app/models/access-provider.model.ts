@@ -1,7 +1,11 @@
 export interface AccessProviderModel {
 
-  accessProvider : string;
+  accessProviderId : number;
 
-  accessProject : string;
+  accessProjectId : number;
+
+  accessProviderName : string;
+
+  accessProjectName : string;
 
 }

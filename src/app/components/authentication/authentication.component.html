@@ -1,7 +1,50 @@
-<form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
-  <input type="text" formControlName="email" placeholder="Enter Your Email">
-  <input type="text" formControlName="password" placeholder="Enter Your Password">
-  <button>Log In</button>
+<p class="text-xl font-bold font-poppins text-center mx-auto my-[20%] md:my-[10%]
+  lg:my-[8%] xl:my-[5%] md:text-2xl">
+  Login to your Account
+</p>
+
+<form [formGroup]="loginForm"
+  class="flex flex-col space-y-5 items-center mx-auto md:w-[70%] lg:w-[50%] xl:w-[30%]">
+
+  <div class="flex flex-col w-[80%] space-y-1">
+    <label class="font-poppins font-medium">Email ID</label>
+    <input type="text"
+           formControlName="email"
+           placeholder="Enter Your Email"
+           class="border-gray-400 border-2 px-2 py-2 rounded-lg hover:border-gray-500 font-poppins
+           text-xs md:py-4 md:px-4"
+    >
+  </div>
+
+  <div class="flex flex-col w-[80%] space-y-1">
+    <label class="font-poppins font-medium">Password</label>
+    <input type="text"
+           formControlName="password"
+           placeholder="Enter Your Password"
+           class="border-gray-400 border-2 px-2 py-2 rounded-lg hover:border-gray-500 font-poppins
+           text-xs md:py-4 md:px-4"
+    >
+  </div>
+
 </form>
-<p routerLink="/register">Click Here to Register</p>
-<p routerLink="/forget-password">Forget password ?</p>
+<div class="flex flex-col space-y-10 w-[80%] mx-[10%] md:w-[56%] md:mx-[22%] lg:w-[40%] lg:mx-[30%]
+  xl:w-[24%] xl:mx-[38%] md:my-2 my-1">
+  <p routerLink="/forget-password"
+     class="text-end font-poppins cursor-pointer text-xs font-medium opacity-[50%] hover:font-semibold">
+    Forget password ?
+  </p>
+
+  <button class="bg-[#5779F1] text-white w-full h-[20%] rounded-lg py-2 font-poppins font-semibold
+  hover:opacity-[90%]"
+          (click)="onLoginSubmit()">
+    Login
+  </button>
+</div>
+
+<div class="flex justify-center mx-auto my-8 space-x-1 items-center">
+  <p class="font-poppins text-xs">New to Nameflow?</p>
+  <p routerLink="/register"
+     class="font-poppins cursor-pointer text-[#5779F1] text-sm opacity-[70%] font-medium hover:font-semibold">
+    Register an Account
+  </p>
+</div>

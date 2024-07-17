@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, Inject, OnInit} from '@angular/core';
 import {ProjectDataModel} from "../../models/project-data.model";
 import {ProjectService} from "../../services/projectServices/project-services.service";
 import {Store} from "@ngrx/store";
@@ -9,6 +9,8 @@ import {MatDialog} from "@angular/material/dialog";
 import {CreateProjectDialogBoxComponent} from "../create-project-dialog-box/create-project-dialog-box.component";
 import {ProjectAccessDialogBoxComponent} from "../project-access-dialog-box/project-access-dialog-box.component";
 import {RouterLink} from "@angular/router";
+import {browserRelodeStatePersists} from "../../store/action/browser-relode.action";
+import {AppComponent} from "../../app.component";
 
 @Component({
   selector: 'app-home',
@@ -28,8 +30,10 @@ export class HomeComponent implements OnInit{
   constructor(
     private projectService : ProjectService,
     private store : Store<AppState>,
-    private dialog : MatDialog
+    private dialog : MatDialog,
+    private appComponent : AppComponent
   ) {
+    //appComponent.functionToBeExecutedOnBrowserLoad();
   }
 
   getProjectsRefresh() {
@@ -79,5 +83,23 @@ export class HomeComponent implements OnInit{
       exitAnimationDuration,
     })
   }
+
+  // functionToBeExecutedOnBrowserLode() {
+  //   let sessionStateString : string | null = sessionStorage.getItem("userDetails");
+  //
+  //   if(sessionStateString!=""){
+  //     let sessionState = JSON.parse(sessionStateString!);
+  //     this.store.dispatch(browserRelodeStatePersists({
+  //       userId : sessionState.userId,
+  //       firstName : sessionState.firstName,
+  //       lastName : sessionState.lastName,
+  //       gender : sessionState.gender,
+  //       age : sessionState.age,
+  //       mobileNumber : sessionState.mobileNumber,
+  //       email : sessionState.email,
+  //       role : sessionState.role
+  //     }))
+  //   }
+  // }
 
 }

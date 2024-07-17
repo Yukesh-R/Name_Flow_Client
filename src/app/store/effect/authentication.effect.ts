@@ -16,7 +16,7 @@ export class AuthenticationEffect {
   constructor(
     private actions$ : Actions,
     private userService : UserService,
-    private router : Router
+    private router : Router,
   ) { }
 
   authenticationEffect$ = createEffect(() =>
@@ -28,6 +28,7 @@ export class AuthenticationEffect {
             console.log(authenticationResponseDTO);
             if(authenticationResponseDTO!=null){
               sessionStorage.setItem("jwtToken", authenticationResponseDTO.jwtToken);
+              sessionStorage.setItem("userDetails",JSON.stringify(authenticationResponseDTO));
               this.router.navigate(['/home']).then(status => true);
               return authenticationSuccessAction({
                 userId : authenticationResponseDTO.userId,
