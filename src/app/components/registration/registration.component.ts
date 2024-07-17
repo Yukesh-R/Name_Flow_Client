@@ -3,14 +3,16 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {UserService} from "../../services/userServices/user-services.service";
 import {RegistrationRequestModel} from "../../models/registration-request.model";
 import {NgIf} from "@angular/common";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-registration',
   standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    NgIf
-  ],
+    imports: [
+        ReactiveFormsModule,
+        NgIf,
+        RouterLink
+    ],
   templateUrl: './registration.component.html',
   styleUrl: './registration.component.css'
 })
@@ -71,7 +73,7 @@ export class RegistrationComponent {
       gender : this.registrationForm.value.gender!,
       age : this.registrationForm.value.age!,
       mobileNumber : this.registrationForm.value.mobileNumber!,
-      email : this.registrationForm.value.email!,
+      email : this.emailForm.value.email!,
       password : this.registrationForm.value.password!,
       role : this.registrationForm.value.role!,
       activationCode : this.registrationForm.value.activationCode!,
