@@ -8,14 +8,14 @@ import { UserDetailsModel } from '../../models/user-details.model';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateProjectDialogBoxComponent } from '../create-project-dialog-box/create-project-dialog-box.component';
 import { ProjectAccessDialogBoxComponent } from '../project-access-dialog-box/project-access-dialog-box.component';
-import {NgFor, NgIf} from '@angular/common';
+import {NgClass, NgFor, NgIf} from '@angular/common';
 import { Router } from '@angular/router';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgFor, RouterLink, NgIf],
+  imports: [NgFor, RouterLink, NgIf, NgClass],
 
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
@@ -31,6 +31,8 @@ export class HomeComponent implements OnInit {
 
   showProfile : boolean = false;
   showProjectsMoreOption : boolean = false;
+
+  clickedIndex? : number;
 
   constructor(
     private projectService: ProjectService,
@@ -133,8 +135,25 @@ export class HomeComponent implements OnInit {
     this.showProfile=!this.showProfile;
   }
 
-  onProjectsMoreOptionClick() {
+  onProjectsMoreOptionClick(index : number) {
     this.showProjectsMoreOption=!this.showProjectsMoreOption;
+    if(this.showProjectsMoreOption){
+      this.clickedIndex=index;
+    }
+    console.log("i : ",this.clickedIndex);
+  }
+
+  activeButton: string = 'allProjects';
+
+  setActiveButton(buttonName: string) {
+    this.activeButton = buttonName;
+    if (buttonName === 'allProjects') {
+      this.onAllProjectsClick();
+    } else if (buttonName === 'accessProjects') {
+      this.onAccessProjectClick();
+    } else if (buttonName === 'myProjects') {
+      this.onMyProjectsClick();
+    }
   }
 
 }
