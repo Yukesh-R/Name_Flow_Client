@@ -34,14 +34,15 @@ export class HomeComponent implements OnInit {
   showProfile: boolean = false;
   showProjectsMoreOption: boolean = false;
 
-  clickedIndex? : number;
+  clickedIndex?: number;
 
   constructor(
     private projectService: ProjectService,
     private store: Store<AppState>,
     private dialog: MatDialog,
     private route: Router,
-  ) {}
+  ) {
+  }
 
   userName: string = '';
   userId!: number;
@@ -108,7 +109,7 @@ export class HomeComponent implements OnInit {
 
   viewProject(projectId: number) {
     this.route.navigate(['/all-variables'], {
-      queryParams: { data: projectId },
+      queryParams: {data: projectId},
     });
   }
 
@@ -139,12 +140,12 @@ export class HomeComponent implements OnInit {
     this.showProfile = !this.showProfile;
   }
 
-  onProjectsMoreOptionClick(index : number) {
-    this.showProjectsMoreOption=!this.showProjectsMoreOption;
-    if(this.showProjectsMoreOption){
-      this.clickedIndex=index;
+  onProjectsMoreOptionClick(index: number) {
+    this.showProjectsMoreOption = !this.showProjectsMoreOption;
+    if (this.showProjectsMoreOption) {
+      this.clickedIndex = index;
     }
-    console.log("i : ",this.clickedIndex);
+    console.log("i : ", this.clickedIndex);
   }
 
   activeButton: string = 'allProjects';
@@ -158,6 +159,7 @@ export class HomeComponent implements OnInit {
     } else if (buttonName === 'myProjects') {
       this.onMyProjectsClick();
     }
+  }
 
   onUpdateProject(index: number) {
     this.dialog.open(UpdateProjectDialogBoxComponent, {
@@ -166,11 +168,14 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  onUpdateUser() {}
+  onUpdateUser() {
+  }
 
   onDeleteUser() {
     this.dialog.open(DeleteUserDialogBoxComponent, {
       data: this.userId,
     });
   }
+
 }
+
