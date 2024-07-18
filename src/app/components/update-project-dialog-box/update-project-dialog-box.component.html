@@ -1,0 +1,50 @@
+<h1>Update Project Details</h1>
+<form [formGroup]="updateProjectForm">
+  <input formControlName="projectName" placeholder="Enter Project Name" />
+  <div
+    *ngIf="
+      updateProjectForm.controls['projectName'].invalid &&
+      updateProjectForm.touched
+    "
+  >
+    Project Name Cannot be Empty
+  </div>
+  <input
+    formControlName="projectDescription"
+    placeholder="Enter Project Description"
+  />
+  <div
+    *ngIf="
+      updateProjectForm.controls['projectDescription'].invalid &&
+      updateProjectForm.touched
+    "
+  >
+    Project Description Cannot be Empty
+  </div>
+  <input
+    formControlName="techStackDescription"
+    placeholder="Enter Tech Stack"
+  />
+  <div
+    *ngIf="
+      updateProjectForm.controls['techStackDescription'].invalid &&
+      updateProjectForm.touched
+    "
+  >
+    Project Tech Stack Description Cannot be Empty
+  </div>
+  <input
+    formControlName="projectContributors"
+    placeholder="Enter Project Contributors"
+  />
+  <div
+    *ngIf="
+      updateProjectForm.controls['projectContributors'].invalid &&
+      updateProjectForm.touched
+    "
+  >
+    Project Contributors Cannot be Empty
+  </div>
+  <button (click)="onUpdate()">Update</button>
+  <button (click)="onClose()">Cancel</button>
+</form>

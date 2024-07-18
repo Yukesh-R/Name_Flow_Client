@@ -11,6 +11,8 @@ import { ProjectAccessDialogBoxComponent } from '../project-access-dialog-box/pr
 import {NgClass, NgFor, NgIf} from '@angular/common';
 import { Router } from '@angular/router';
 import { RouterLink } from '@angular/router';
+import { UpdateProjectDialogBoxComponent } from '../update-project-dialog-box/update-project-dialog-box.component';
+import { DeleteUserDialogBoxComponent } from '../delete-user-dialog-box/delete-user-dialog-box.component';
 
 @Component({
   selector: 'app-home',
@@ -25,12 +27,12 @@ export class HomeComponent implements OnInit {
 
   accessProjects: ProjectDataModel[] = [];
 
-  showAllProjects : boolean = true;
-  showMyProjects : boolean = false;
-  showAccessProject : boolean = false;
+  showAllProjects: boolean = true;
+  showMyProjects: boolean = false;
+  showAccessProject: boolean = false;
 
-  showProfile : boolean = false;
-  showProjectsMoreOption : boolean = false;
+  showProfile: boolean = false;
+  showProjectsMoreOption: boolean = false;
 
   clickedIndex? : number;
 
@@ -41,7 +43,8 @@ export class HomeComponent implements OnInit {
     private route: Router,
   ) {}
 
-  userName : string = "";
+  userName: string = '';
+  userId!: number;
 
   getProjectsRefresh() {
     let userIdFromState: number = -1;
@@ -49,7 +52,8 @@ export class HomeComponent implements OnInit {
       .select(userDetailsSelector)
       .subscribe((userDetails: UserDetailsModel) => {
         userIdFromState = userDetails.userId;
-        this.userName=userDetails.firstName+" "+userDetails.lastName;
+        this.userId = userDetails.userId;
+        this.userName = userDetails.firstName + ' ' + userDetails.lastName;
       });
     this.projectService.getOwnProjects(userIdFromState).subscribe({
       next: (projectData: ProjectDataModel[]) => {
@@ -114,25 +118,25 @@ export class HomeComponent implements OnInit {
   }
 
   onAllProjectsClick() {
-    this.showAllProjects=true;
-    this.showMyProjects=false;
-    this.showAccessProject=false;
+    this.showAllProjects = true;
+    this.showMyProjects = false;
+    this.showAccessProject = false;
   }
 
   onMyProjectsClick() {
-    this.showAllProjects=false;
-    this.showMyProjects=true;
-    this.showAccessProject=false;
+    this.showAllProjects = false;
+    this.showMyProjects = true;
+    this.showAccessProject = false;
   }
 
   onAccessProjectClick() {
-    this.showAllProjects=false;
-    this.showMyProjects=false;
-    this.showAccessProject=true;
+    this.showAllProjects = false;
+    this.showMyProjects = false;
+    this.showAccessProject = true;
   }
 
   onProfileClick() {
-    this.showProfile=!this.showProfile;
+    this.showProfile = !this.showProfile;
   }
 
   onProjectsMoreOptionClick(index : number) {
@@ -154,6 +158,19 @@ export class HomeComponent implements OnInit {
     } else if (buttonName === 'myProjects') {
       this.onMyProjectsClick();
     }
+
+  onUpdateProject(index: number) {
+    this.dialog.open(UpdateProjectDialogBoxComponent, {
+      width: '80%',
+      data: this.myProjects[index],
+    });
   }
 
+  onUpdateUser() {}
+
+  onDeleteUser() {
+    this.dialog.open(DeleteUserDialogBoxComponent, {
+      data: this.userId,
+    });
+  }
 }
