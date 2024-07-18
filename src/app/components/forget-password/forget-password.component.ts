@@ -44,11 +44,7 @@ export class ForgetPasswordComponent {
   });
 
   resetPasswordForm = new FormGroup({
-    activationCode: new FormControl('', [
-      Validators.required,
-      Validators.minLength(6),
-      Validators.maxLength(6),
-    ]),
+    activationCode: new FormControl('', [Validators.required]),
     newPassword: new FormControl('', [
       Validators.required,
       Validators.minLength(6),
