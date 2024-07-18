@@ -1,14 +1,187 @@
-<div *ngFor="let project of myProjects; let i = index">
-  <span>{{ i + 1 }}</span>
-  <div>{{ project.projectName }}</div>
-  <div>{{ project.projectDescription }}</div>
-  <div>{{ project.techStackDescription }}</div>
-  <div>{{ project.projectContributors }}</div>
-  <button (click)="viewProject(project.id)">View</button>
+<nav class="flex flex-col sm:flex-row justify-between items-center bg-white p-4 shadow-md">
+  <div class="flex flex-col text-center sm:text-left">
+    <p class="text-lg font-semibold">Hello Alice!</p>
+    <p class="text-sm text-gray-600">Welcome to Name Flow, let's boost your developer experience</p>
+  </div>
+  <div class="flex items-center space-x-4 mt-4 sm:mt-0">
+    <p class="cursor-pointer">Inbox</p>
+    <button (click)="onProfileClick()">
+      <img src="../../../assets/profile.svg" alt="Profile" class="w-8 h-8">
+    </button>
+  </div>
+</nav>
+
+<section class="p-4" *ngIf="showProfile">
+  <div class="bg-white p-4 rounded-lg shadow-md space-x-2">
+    <button class="bg-blue-500 text-white px-4 py-2 rounded">Update</button>
+    <button class="bg-red-500 text-white px-4 py-2 rounded" (click)="onLogout()">Logout</button>
+  </div>
+</section>
+
+<div class="flex flex-col sm:flex-row justify-center space-y-2 sm:space-y-0 sm:space-x-4 p-4 text-center sm:text-left">
+  <button class="text-blue-500" (click)="onAllProjectsClick()">All Projects</button>
+  <button class="text-gray-500" (click)="onMyProjectsClick()">My Projects</button>
+  <button class="text-gray-500" (click)="onAccessProjectClick()">Access Projects</button>
 </div>
 
-<button (click)="onCreateNewProject('800ms', '500ms')">Create Project</button>
-<button (click)="onAccessProject(1, '800ms', '500ms')">Provide Access</button>
-<p routerLink="/inbox">InBox</p>
+<section class="p-4" *ngIf="showAllProjects">
+  <div class="overflow-x-auto">
+    <table class="min-w-full bg-white rounded-lg shadow-md">
+      <thead class="bg-gray-200 text-gray-600">
+      <tr>
+        <th class="py-2 px-4">S.No</th>
+        <th class="py-2 px-4">Name</th>
+        <th class="py-2 px-4">Description</th>
+        <th class="py-2 px-4">TechStack</th>
+        <th class="py-2 px-4">Contributors</th>
+        <th class="py-2 px-4">View Variables</th>
+        <th class="py-2 px-4">More</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="border-b" *ngFor="let project of myProjects; let i = index">
+        <td class="py-2 px-4">{{ i + 1 }}</td>
+        <td class="py-2 px-4">{{ project.projectName }}</td>
+        <td class="py-2 px-4">{{ project.projectDescription }}</td>
+        <td class="py-2 px-4">{{ project.techStackDescription }}</td>
+        <td class="py-2 px-4">{{ project.projectContributors }}</td>
+        <td class="py-2 px-4">
+          <button class="bg-blue-500 text-white px-4 py-2 rounded" (click)="viewProject(project.id)">
+            View
+          </button>
+        </td>
+        <td class="py-2 px-4">
+          <button class="bg-gray-500 text-white px-2 py-2 rounded" (click)="onAccessProject(1, '800ms', '500ms')">
+            Provide Access
+          </button>
+        </td>
+        <td class="py-2 px-4">
+          <button (click)="onProjectsMoreOptionClick()" class="w-4 h-4">
+            <img src="../../../assets/three-dots-vertical-svgrepo-com.svg" alt="More">
+          </button>
+        </td>
+      </tr>
+      <tr class="border-b" *ngFor="let project of accessProjects; let i = index">
+        <td class="py-2 px-4">{{ i + 1 + +myProjects.length }}</td>
+        <td class="py-2 px-4">{{ project.projectName }}</td>
+        <td class="py-2 px-4">{{ project.projectDescription }}</td>
+        <td class="py-2 px-4">{{ project.techStackDescription }}</td>
+        <td class="py-2 px-4">{{ project.projectContributors }}</td>
+        <td class="py-2 px-4">
+          <button class="bg-blue-500 text-white px-4 py-2 rounded" (click)="viewProject(project.id)">
+            View
+          </button>
+        </td>
+        <td class="py-2 px-4">
+          <button class="bg-gray-500 text-white px-2 py-2 rounded" (click)="onAccessProject(1, '800ms', '500ms')">
+            Provide Access
+          </button>
+        </td>
+        <td class="py-2 px-4">
+          <button (click)="onProjectsMoreOptionClick()" class="w-4 h-4">
+            <img src="../../../assets/three-dots-vertical-svgrepo-com.svg" alt="More">
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
 
-<button (click)="onLogout()">Log out</button>
+<section class="p-4" *ngIf="showMyProjects">
+  <div class="overflow-x-auto">
+    <table class="min-w-full bg-white rounded-lg shadow-md">
+      <thead class="bg-gray-200 text-gray-600">
+      <tr>
+        <th class="py-2 px-4">S.No</th>
+        <th class="py-2 px-4">Name</th>
+        <th class="py-2 px-4">Description</th>
+        <th class="py-2 px-4">TechStack</th>
+        <th class="py-2 px-4">Contributors</th>
+        <th class="py-2 px-4">View Variables</th>
+        <th class="py-2 px-4">More</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="border-b" *ngFor="let project of myProjects; let i = index">
+        <td class="py-2 px-4">{{ i + 1 }}</td>
+        <td class="py-2 px-4">{{ project.projectName }}</td>
+        <td class="py-2 px-4">{{ project.projectDescription }}</td>
+        <td class="py-2 px-4">{{ project.techStackDescription }}</td>
+        <td class="py-2 px-4">{{ project.projectContributors }}</td>
+        <td class="py-2 px-4">
+          <button class="bg-blue-500 text-white px-4 py-2 rounded" (click)="viewProject(project.id)">
+            View
+          </button>
+        </td>
+        <td class="py-2 px-4">
+          <button class="bg-gray-500 text-white px-2 py-2 rounded" (click)="onAccessProject(1, '800ms', '500ms')">
+            Provide Access
+          </button>
+        </td>
+        <td class="py-2 px-4">
+          <button (click)="onProjectsMoreOptionClick()" class="w-4 h-4">
+            <img src="../../../assets/three-dots-vertical-svgrepo-com.svg" alt="More">
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="p-4" *ngIf="showAccessProject">
+  <div class="overflow-x-auto">
+    <table class="min-w-full bg-white rounded-lg shadow-md">
+      <thead class="bg-gray-200 text-gray-600">
+      <tr>
+        <th class="py-2 px-4">S.No</th>
+        <th class="py-2 px-4">Name</th>
+        <th class="py-2 px-4">Description</th>
+        <th class="py-2 px-4">TechStack</th>
+        <th class="py-2 px-4">Contributors</th>
+        <th class="py-2 px-4">View Variables</th>
+        <th class="py-2 px-4">More</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="border-b" *ngFor="let project of accessProjects; let i = index">
+        <td class="py-2 px-4">{{ i + 1 }}</td>
+        <td class="py-2 px-4">{{ project.projectName }}</td>
+        <td class="py-2 px-4">{{ project.projectDescription }}</td>
+        <td class="py-2 px-4">{{ project.techStackDescription }}</td>
+        <td class="py-2 px-4">{{ project.projectContributors }}</td>
+        <td class="py-2 px-4">
+          <button class="bg-blue-500 text-white px-4 py-2 rounded" (click)="viewProject(project.id)">
+            View
+          </button>
+        </td>
+        <td class="py-2 px-4">
+          <button class="bg-gray-500 text-white px-2 py-2 rounded" (click)="onAccessProject(1, '800ms', '500ms')">
+            Provide Access
+          </button>
+        </td>
+        <td class="py-2 px-4">
+          <button (click)="onProjectsMoreOptionClick()" class="w-4 h-4">
+            <img src="../../../assets/three-dots-vertical-svgrepo-com.svg" alt="More">
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="p-4" *ngIf="showProjectsMoreOption">
+  <div class="bg-white p-4 rounded-lg shadow-md space-x-2">
+    <button class="bg-blue-500 text-white px-4 py-2 rounded">Update</button>
+    <button class="bg-gray-500 text-white px-4 py-2 rounded">Manage Access</button>
+  </div>
+</section>
+
+<div class="flex justify-center p-4">
+  <button class="bg-blue-500 text-white px-4 py-2 rounded"
+          (click)="onCreateNewProject('800ms', '500ms')">
+    Create Project
+  </button>
+</div>

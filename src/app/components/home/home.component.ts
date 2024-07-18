@@ -8,14 +8,14 @@ import { UserDetailsModel } from '../../models/user-details.model';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateProjectDialogBoxComponent } from '../create-project-dialog-box/create-project-dialog-box.component';
 import { ProjectAccessDialogBoxComponent } from '../project-access-dialog-box/project-access-dialog-box.component';
-import { NgFor } from '@angular/common';
+import {NgFor, NgIf} from '@angular/common';
 import { Router } from '@angular/router';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgFor, RouterLink],
+  imports: [NgFor, RouterLink, NgIf],
 
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
@@ -25,6 +25,13 @@ export class HomeComponent implements OnInit {
 
   accessProjects: ProjectDataModel[] = [];
 
+  showAllProjects : boolean = true;
+  showMyProjects : boolean = false;
+  showAccessProject : boolean = false;
+
+  showProfile : boolean = false;
+  showProjectsMoreOption : boolean = false;
+
   constructor(
     private projectService: ProjectService,
     private store: Store<AppState>,
@@ -32,12 +39,15 @@ export class HomeComponent implements OnInit {
     private route: Router,
   ) {}
 
+  userName : string = "";
+
   getProjectsRefresh() {
     let userIdFromState: number = -1;
     this.store
       .select(userDetailsSelector)
       .subscribe((userDetails: UserDetailsModel) => {
         userIdFromState = userDetails.userId;
+        this.userName=userDetails.firstName+" "+userDetails.lastName;
       });
     this.projectService.getOwnProjects(userIdFromState).subscribe({
       next: (projectData: ProjectDataModel[]) => {
@@ -99,6 +109,32 @@ export class HomeComponent implements OnInit {
   onLogout() {
     localStorage.clear();
     this.route.navigate(['/']);
+  }
+
+  onAllProjectsClick() {
+    this.showAllProjects=true;
+    this.showMyProjects=false;
+    this.showAccessProject=false;
+  }
+
+  onMyProjectsClick() {
+    this.showAllProjects=false;
+    this.showMyProjects=true;
+    this.showAccessProject=false;
+  }
+
+  onAccessProjectClick() {
+    this.showAllProjects=false;
+    this.showMyProjects=false;
+    this.showAccessProject=true;
+  }
+
+  onProfileClick() {
+    this.showProfile=!this.showProfile;
+  }
+
+  onProjectsMoreOptionClick() {
+    this.showProjectsMoreOption=!this.showProjectsMoreOption;
   }
 
 }
