@@ -1,7 +1,7 @@
 import { Component, OnInit, inject, model } from '@angular/core';
 import { VariablesComponent } from '../variables/variables.component';
 import { GetVariableRequestModel } from '../../models/get-variable-request-model.Model';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogClose, MatDialogRef} from '@angular/material/dialog';
 import {
   FormControl,
   FormGroup,
@@ -17,7 +17,7 @@ import { CommonModule, NgIf } from '@angular/common';
 @Component({
   selector: 'app-create-variable-dialog-box',
   standalone: true,
-  imports: [ReactiveFormsModule, NgIf, CommonModule, FormsModule],
+    imports: [ReactiveFormsModule, NgIf, CommonModule, FormsModule, MatDialogClose],
   templateUrl: './create-variable-dialog-box.component.html',
   styleUrl: './create-variable-dialog-box.component.css',
 })

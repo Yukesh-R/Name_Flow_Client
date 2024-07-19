@@ -1,3 +1,21 @@
-<h1>Do you Confirm the Deletion Operation</h1>
-<button (click)="onDelete()">Delete</button>
-<button (click)="onClose()">Cancel</button>
+<button class="w-10 h-10 items-start sm:mx-10 mx-2 mt-[2%]" mat-dialog-close>
+  <img src="../../../assets/back-arrow-svgrepo-com.svg" alt="">
+</button>
+
+<div class=" flex flex-col items-center justify-center space-y-4 px-4 py-4">
+
+  <p class="text-xl font-bold font-poppins">Delete Account</p>
+
+  <p class="text-gray-600 text-lg font-poppins">Do you Confirm the Deletion Operation</p>
+
+  <div class="flex space-x-5">
+    <button (click)="onDelete()" mat-dialog-close
+    class="bg-[#ED6B6B] text-white px-3 py-2 rounded-lg font-poppins">
+      Delete
+    </button>
+    <button (click)="onClose()" mat-dialog-close
+            class="bg-[#D9D9D9] text-black px-3 py-2 rounded-lg font-poppins">
+      Cancel
+    </button>
+  </div>
+</div>

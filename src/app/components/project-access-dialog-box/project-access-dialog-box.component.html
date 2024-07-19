@@ -1,16 +1,51 @@
-<form [formGroup]="accessForm" (ngSubmit)="onAccessFormSubmit()">
-  <input
-    type="text"
-    placeholder="Enter the Your Contributor Email"
-    formControlName="emailToRelation"
-  />
-  <div
-    *ngIf="
-      accessForm.controls['emailToRelation'].invalid && isSubmittedAccessForm
-    "
+<div class="px-4 py-4 w-full">
+
+  <button class="w-10 h-10 items-start sm:mx-10 mx-2 mt-[2%]" mat-dialog-close>
+    <img src="../../../assets/back-arrow-svgrepo-com.svg" alt="">
+  </button>
+
+  <p class="text-xl font-bold text-center font-poppins">Provide Access to Others</p>
+
+  <p
+    class="text-xs text-[#00000080] px-2 text-center mx-[2%] my-2 font-poppins"
   >
-    Contributor Email Cannot be Empty
-  </div>
-  <button>Submit</button>
-  <button>Cancel</button>
-</form>
+    By Providing Access the developer can modify the project details
+  </p>
+
+  <form [formGroup]="accessForm"
+        class="flex flex-col items-center justify-center space-y-6 mx-auto w-full">
+
+    <div class="flex flex-col space-y-1 w-full">
+      <label class="font-poppins font-semibold">Email ID</label>
+      <input
+        type="text"
+        placeholder="Enter the Your Contributor Email"
+        formControlName="emailToRelation"
+        class="border-gray-400 border-2 px-3 py-3 rounded-lg hover:border-gray-500 font-poppins
+        text-xs w-full"
+      />
+
+      <div
+        *ngIf="
+          accessForm.controls['emailToRelation'].invalid && isSubmittedAccessForm
+        "
+        class="text-red-500 text-sm"
+      >
+        Contributor Email Cannot be Empty
+      </div>
+    </div>
+
+    <div class="flex space-x-5">
+      <button class="bg-[#5779F1] text-white px-3 py-2 rounded-lg font-poppins"
+      (click)="onAccessFormSubmit()">
+        Submit
+      </button>
+
+      <button class="bg-[#D9D9D9] text-black px-3 py-2 rounded-lg font-poppins"
+      mat-dialog-close>
+        Cancel
+      </button>
+    </div>
+  </form>
+
+</div>

@@ -1,9 +1,13 @@
-<p class="text-center font-poppins font-bold my-[5%]">Inbox</p>
+<button class="w-10 h-10 items-start sm:mx-10 mx-2 mt-[2%]" mat-dialog-close>
+  <img src="../../../assets/back-arrow-svgrepo-com.svg" alt="">
+</button>
+
+<p class="text-center font-poppins font-bold my-[2%]">Inbox</p>
 
 <div class="px-4 py-4">
   <div *ngFor="let access of accessProvidersList; let i=index"
-       class="bg-[#F3F3F3] rounded-lg py-5 w-full sm:px-5 grid grid-cols-3
-        items-center mx-auto px-1
+       class="bg-[#F3F3F3] rounded-lg py-5 sm:px-5 grid grid-cols-3
+        items-center mx-auto px-1 w-[80%]
         ">
     <p class="hidden">{{i+1}}</p>
 

@@ -68,31 +68,17 @@ export class VariablesComponent implements OnInit {
         projectId: this.projectId,
       },
       width: '80%',
+      height : '90%',
     });
   }
 
   createVariableManual() {
     this.dialog.open(CreateVariableManualDialogBoxComponent, {
-      width: '60%',
+      width: '80%',
+      height : '90%',
       data: {
         userId: this.userId,
         projectId: this.projectId,
-      },
-    });
-  }
-
-  getAllVariables() {
-    let getVariableModel: GetVariableRequestModel = {
-      userId: this.userId,
-      projectId: this.projectId,
-    };
-
-    this.variableService.getVariables(getVariableModel).subscribe({
-      next: (data: GetVariableResponseModel[]) => {
-        this.allVariables = data;
-      },
-      error: (error: Error) => {
-        console.log(error);
       },
     });
   }
@@ -109,7 +95,7 @@ export class VariablesComponent implements OnInit {
         description: this.allVariables[index].description,
         variableType: this.allVariables[index].variableType,
       },
-
+      height : '90%',
       width: '80%',
     });
   }

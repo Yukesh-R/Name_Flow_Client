@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogClose} from '@angular/material/dialog';
 import {
   FormControl,
   FormGroup,
@@ -18,7 +18,7 @@ import { NgIf } from '@angular/common';
 @Component({
   selector: 'app-project-access-dialog-box',
   standalone: true,
-  imports: [ReactiveFormsModule, NgIf],
+    imports: [ReactiveFormsModule, NgIf, MatDialogClose],
   templateUrl: './project-access-dialog-box.component.html',
   styleUrl: './project-access-dialog-box.component.css',
 })

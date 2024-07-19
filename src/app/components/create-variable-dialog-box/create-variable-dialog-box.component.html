@@ -1,5 +1,9 @@
 <div class="px-2 py-2">
 
+  <button class="w-10 h-10 items-start sm:mx-10 mx-2 mt-[2%]" mat-dialog-close>
+    <img src="../../../assets/back-arrow-svgrepo-com.svg" alt="">
+  </button>
+
   <p class="text-xl font-bold text-center font-poppins my-[2%]">Create You Own variable</p>
 
   <form [formGroup]="createVariableAIForm"
@@ -61,7 +65,6 @@
       <div class="flex flex-col w-full md:w-[80%] space-y-1" *ngIf="isOtherDataTypeSelected">
         <label class="font-poppins font-medium">Other Data type</label>
         <input
-          *ngIf="isOtherVarTypeSelected"
           placeholder="Enter the type of your Variable"
           type="text"
           formControlName="otherVarTypeSelected"
@@ -74,7 +77,7 @@
     <button (click)="createVariableAI()"
             class="bg-[#5779F1] text-white w-[80%] h-[20%] rounded-lg py-2 font-poppins font-semibold
       hover:opacity-[90%] my-[4%]"
-    >
+    mat-dialog-close>
       Create
     </button>
 
