@@ -1,37 +1,83 @@
-<h1>Create New Variable by Us</h1>
-<form [formGroup]="createVariableAIForm">
-  <select (change)="isOtherDataTypeCheck()" formControlName="dataType">
-    <option value="">Select the Data Type</option>
-    <option value="string">String</option>
-    <option value="boolean">Boolean</option>
-    <option value="number">Number</option>
-    <option value="others">Other</option>
-  </select>
-  <form [formGroup]="otherDataTypeSelectedForm">
-    <input
-      *ngIf="isOtherDataTypeSelected"
-      placeholder="Enter the Data Type"
-      type="text"
-      formControlName="otherDataTypeSelected"
-    />
-  </form>
-  <input formControlName="description" placeholder="Provide some details" />
+<div class="px-2 py-2">
 
-  <select (change)="isOtherVarTypeCheck()" formControlName="variableType">
-    <option value="">Select the Type of your Variable</option>
-    <option value="class">Class</option>
-    <option value="interface">Interface</option>
-    <option value="function">Function</option>
-    <option value="variable">Variable</option>
-    <option value="others">Other</option>
-  </select>
-  <form [formGroup]="otherVarTypeSelectedForm">
-    <input
-      *ngIf="isOtherVarTypeSelected"
-      placeholder="Enter the type of your Variable"
-      type="text"
-      formControlName="otherVarTypeSelected"
-    />
+  <p class="text-xl font-bold text-center font-poppins my-[2%]">Create You Own variable</p>
+
+  <form [formGroup]="createVariableAIForm"
+        class="flex flex-col space-y-2 xl:space-y-6 items-center mx-auto w-full">
+
+    <div class="flex flex-col space-y-1 w-full md:w-[80%]">
+      <label class="font-poppins font-medium">Data type</label>
+      <select (change)="isOtherDataTypeCheck()" formControlName="dataType"
+              class="border-gray-400 border-2 px-2 py-2 rounded-lg hover:border-gray-500 font-poppins
+          text-xs md:py-4 md:px-4">
+        <option value="">Select the Data Type</option>
+        <option value="string">String</option>
+        <option value="boolean">Boolean</option>
+        <option value="number">Number</option>
+        <option value="others">Other</option>
+      </select>
+    </div>
+
+    <form [formGroup]="otherDataTypeSelectedForm" *ngIf="isOtherDataTypeSelected"
+          class="flex flex-col space-y-2 xl:space-y-6 items-center mx-auto w-full">
+      <div class="flex flex-col w-full md:w-[80%] space-y-1">
+        <label class="font-poppins font-medium">Other Data type</label>
+        <input
+          placeholder="Enter the Data Type"
+          type="text"
+          formControlName="otherDataTypeSelected"
+          class="border-gray-400 border-2 px-2 py-2 rounded-lg hover:border-gray-500 font-poppins
+        text-xs md:py-4 md:px-4"
+        />
+      </div>
+    </form>
+
+    <div class="flex flex-col space-y-1 w-full md:w-[80%]">
+      <label class="font-poppins font-medium">Description</label>
+      <input
+        formControlName="description"
+        placeholder="Provide some details"
+        class="border-gray-400 border-2 px-2 py-2 rounded-lg hover:border-gray-500 font-poppins
+        text-xs md:py-4 md:px-4"
+      />
+    </div>
+
+    <div class="flex flex-col space-y-1 w-full md:w-[80%]">
+      <label class="font-poppins font-medium">Variable type</label>
+      <select (change)="isOtherVarTypeCheck()" formControlName="variableType"
+              class="border-gray-400 border-2 px-2 py-2 rounded-lg hover:border-gray-500 font-poppins
+          text-xs md:py-4 md:px-4 w-full">
+        <option value="">Select the Type of your Variable</option>
+        <option value="class">Class</option>
+        <option value="interface">Interface</option>
+        <option value="function">Function</option>
+        <option value="variable">Variable</option>
+        <option value="others">Other</option>
+      </select>
+    </div>
+
+    <form [formGroup]="otherVarTypeSelectedForm" *ngIf="isOtherVarTypeSelected"
+          class="flex flex-col space-y-2 xl:space-y-6 items-center mx-auto w-full">
+      <div class="flex flex-col w-full md:w-[80%] space-y-1" *ngIf="isOtherDataTypeSelected">
+        <label class="font-poppins font-medium">Other Data type</label>
+        <input
+          *ngIf="isOtherVarTypeSelected"
+          placeholder="Enter the type of your Variable"
+          type="text"
+          formControlName="otherVarTypeSelected"
+          class="border-gray-400 border-2 px-2 py-2 rounded-lg hover:border-gray-500 font-poppins
+        text-xs md:py-4 md:px-4"
+        />
+      </div>
+    </form>
+
+    <button (click)="createVariableAI()"
+            class="bg-[#5779F1] text-white w-[80%] h-[20%] rounded-lg py-2 font-poppins font-semibold
+      hover:opacity-[90%] my-[4%]"
+    >
+      Create
+    </button>
+
   </form>
-  <button (click)="createVariableAI()">Create</button>
-</form>
+
+</div>

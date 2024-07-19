@@ -73,11 +73,11 @@ export class VariablesComponent implements OnInit {
 
   createVariableManual() {
     this.dialog.open(CreateVariableManualDialogBoxComponent, {
+      width: '60%',
       data: {
         userId: this.userId,
         projectId: this.projectId,
       },
-      width: '80%',
     });
   }
 
