@@ -17,7 +17,10 @@ import { NgIf } from '@angular/common';
 @Component({
   selector: 'app-authentication',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink, NgIf],
+  imports: [ReactiveFormsModule,
+    RouterLink,
+    NgIf,
+  ],
   templateUrl: './authentication.component.html',
   styleUrl: './authentication.component.css',
 })
