@@ -30,7 +30,7 @@
     </div>
 
     <div class="flex flex-col w-[80%] space-y-1">
-      <label class="font-poppins font-medium">Email ID</label>
+      <label class="font-poppins font-medium">Project Description</label>
       <input
         type="text"
         placeholder="Enter Your Project Description"
@@ -43,13 +43,14 @@
         createProjectForm.controls['projectDescription'].invalid &&
         isSubmittedCreateProjectForm
       "
+        class="text-sm text-red-500"
       >
         Project Description Cannot be Empty
       </div>
     </div>
 
     <div class="flex flex-col w-[80%] space-y-1">
-      <label class="font-poppins font-medium">Email ID</label>
+      <label class="font-poppins font-medium">TechStack</label>
       <input
         type="text"
         placeholder="Enter Your TechStack"
@@ -62,13 +63,14 @@
         createProjectForm.controls['techStackDescription'].invalid &&
         isSubmittedCreateProjectForm
       "
+        class="text-sm text-red-500"
       >
         Project TechStackDescription Cannot be Empty
       </div>
     </div>
 
     <div class="flex flex-col w-[80%] space-y-1">
-      <label class="font-poppins font-medium">Email ID</label>
+      <label class="font-poppins font-medium">Project Contributors</label>
       <input
         type="text"
         placeholder="Enter Your ProjectContributors"
@@ -81,6 +83,7 @@
         createProjectForm.controls['projectContributors'].invalid &&
         isSubmittedCreateProjectForm
       "
+        class="text-sm text-red-500"
       >
         Project Contributors Cannot be Empty
       </div>

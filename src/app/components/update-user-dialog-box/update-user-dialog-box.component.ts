@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import {MatDialogClose, MatDialogRef} from '@angular/material/dialog';
 import { HomeComponent } from '../home/home.component';
 import {
   FormControl,
@@ -18,7 +18,7 @@ import { NgIf } from '@angular/common';
 @Component({
   selector: 'app-update-user-dialog-box',
   standalone: true,
-  imports: [ReactiveFormsModule, NgIf],
+    imports: [ReactiveFormsModule, NgIf, MatDialogClose],
   templateUrl: './update-user-dialog-box.component.html',
   styleUrl: './update-user-dialog-box.component.css',
 })

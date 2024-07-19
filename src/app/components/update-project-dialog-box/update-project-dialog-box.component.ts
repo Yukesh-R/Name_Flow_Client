@@ -1,5 +1,5 @@
 import { Component, OnInit, inject, model } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogClose, MatDialogRef} from '@angular/material/dialog';
 import { HomeComponent } from '../home/home.component';
 import { UpdateProjectModel } from '../../models/update-project-model.model';
 import {
@@ -16,7 +16,7 @@ import { NgIf } from '@angular/common';
 @Component({
   selector: 'app-update-project-dialog-box',
   standalone: true,
-  imports: [ReactiveFormsModule, NgIf],
+    imports: [ReactiveFormsModule, NgIf, MatDialogClose],
   templateUrl: './update-project-dialog-box.component.html',
   styleUrl: './update-project-dialog-box.component.css',
 })
