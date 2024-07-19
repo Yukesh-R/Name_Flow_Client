@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 import { RouterLink } from '@angular/router';
 import { UpdateProjectDialogBoxComponent } from '../update-project-dialog-box/update-project-dialog-box.component';
 import { DeleteUserDialogBoxComponent } from '../delete-user-dialog-box/delete-user-dialog-box.component';
+import {ProjectDataPassModel} from "../../models/project-data-pass.model";
 
 @Component({
   selector: 'app-home',
@@ -107,9 +108,17 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  viewProject(projectId: number) {
+  viewProject(index : number) {
+
+    let selectedProject : ProjectDataModel = this.myProjects[index];
+
+    let projectPass : ProjectDataPassModel = {
+      projectId : selectedProject.id,
+      projectName : selectedProject.projectName,
+      projectDescription : selectedProject.projectDescription
+    }
     this.route.navigate(['/all-variables'], {
-      queryParams: {data: projectId},
+      queryParams: projectPass,
     });
   }
 

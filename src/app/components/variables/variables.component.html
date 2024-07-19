@@ -1,12 +1,93 @@
-<h1>All Variables</h1>
-<div *ngFor="let variable of allVariables; let i = index">
-  <span>{{ i + 1 }}</span>
-  <div>{{ variable.variableName }}</div>
-  <div>{{ variable.dataType }}</div>
-  <div>{{ variable.description }}</div>
-  <div>{{ variable.variableType }}</div>
-  <button (click)="updateVariable(i)">Edit Variable</button>
-  <button (click)="deleteVariable(i)">Delete Variable</button>
+<nav class="fixed top-0 left-0 w-full justify-between items-left bg-white py-4 px-2
+    sm:px-12 shadow-md z-10 flex flex-col text-left mb-4 sm:mb-0">
+  <p class="text-sm sm:text-xl font-semibold font-poppins">{{projectName}}</p>
+  <p class="text-xs sm:text-md text-gray-600 font-poppins">{{projectDescription}}</p>
+</nav>
+
+<h1 class="text-center mt-[150px] text-xl font-poppins font-bold">All Variables</h1>
+
+<section class="py-5">
+
+  <div class="flex flex-col space-y-5 overflow-x-auto lg:justify-center lg:items-center mx-auto px-4">
+
+    <div *ngFor="let variable of allVariables; let i = index"
+         class="bg-[#F3F3F3] rounded-lg py-5 w-[90%] px-2 grid grid-cols-2
+        items-center md:grid-cols-5 max-xl:w-[100%] sm:grid-cols-4
+        ">
+
+      <p class="hidden">{{ i + 1 }}</p>
+
+      <div class="flex flex-col">
+        <p class="font-poppins text-[#000000] opacity-[50%] max-sm:text-xs">Variable Name</p>
+        <p class="font-bold font-poppins break-words max-sm:text-sm">{{ variable.variableName }}</p>
+      </div>
+
+      <div class="flex flex-col max-sm:hidden">
+        <p class="font-poppins text-[#000000] opacity-[50%] max-sm:text-xs">Variable Data Type</p>
+        <p class="font-bold font-poppins break-words mx-sm:text-sm">{{ variable.dataType }}</p>
+      </div>
+
+      <div class="flex flex-col max-sm:hidden">
+        <p class="font-poppins text-[#000000] opacity-[50%]">Project Tech Stack</p>
+        <p class="font-bold font-poppins break-words">{{ variable.description }}</p>
+      </div>
+
+      <div class="flex flex-col max-md:hidden">
+        <p class="font-poppins text-[#000000] opacity-[50%]">Project Tech Stack</p>
+        <p class="font-bold font-poppins break-words">{{ variable.variableType }}</p>
+      </div>
+
+      <div class="flex font-poppins justify-center items-center space-x-5 max-sm:space-x-1 max-sm:w-full">
+        <button (click)="updateVariable(i)"
+                class="bg-[#5779F1] text-white px-4 py-2 rounded w-full font-poppins font-semibold
+              max-sm:px-2 max-sm:py-1 max-sm:font-medium"
+        >
+          Edit
+        </button>
+        <button (click)="deleteVariable(i)"
+                class="bg-red-500 text-white px-4 py-2 rounded w-full font-poppins font-semibold
+              max-sm:px-2 max-sm:py-1 max-sm:font-medium"
+        >
+          Delete
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<div class="flex flex-col fixed max-lg:bottom-[6%] max-lg:right-[10%] right-[2%] bottom-[3%]
+    space-y-2 bg-white items-left px-1 py-1 rounded-xl">
+
+  <button *ngIf="!showVariableCreateOption"
+    (click)="onVariableCreateOption()"
+    class="bg-[#5779F1]
+  text-white px-4 py-2 lg:px-6 lg:py-4 rounded sm:font-semibold w-full"
+  >
+    Create Variable
+  </button>
+
+  <div *ngIf="showVariableCreateOption" (click)="onVariableCreateOption()"
+    class="w-6 h-4">
+    <button><img src="../../../assets/back-arrow-svgrepo-com.svg" alt=""></button>
+  </div>
+
+  <div *ngIf="showVariableCreateOption">
+    <button (click)="createVariableAI()"
+            class="bg-gray-600
+    text-white px-4 py-2 lg:px-6 lg:py-4 rounded sm:font-semibold w-full">
+      By Us
+    </button>
+  </div>
+
+  <div *ngIf="showVariableCreateOption">
+    <button (click)="createVariableManual()"
+            class="bg-[#5779F1]
+    text-white px-4 py-2 lg:px-6 lg:py-4 rounded sm:font-semibold w-full">
+      By Manual
+    </button>
+  </div>
+
 </div>
-<div (click)="createVariableAI()">Create Variable by Us</div>
-<div (click)="createVariableManual()">Create Variable by Manual</div>
