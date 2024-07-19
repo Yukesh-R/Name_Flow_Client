@@ -8,11 +8,12 @@ import { UserDetailsModel } from '../../models/user-details.model';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateProjectDialogBoxComponent } from '../create-project-dialog-box/create-project-dialog-box.component';
 import { ProjectAccessDialogBoxComponent } from '../project-access-dialog-box/project-access-dialog-box.component';
-import {NgClass, NgFor, NgIf} from '@angular/common';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import { Router } from '@angular/router';
 import { RouterLink } from '@angular/router';
 import { UpdateProjectDialogBoxComponent } from '../update-project-dialog-box/update-project-dialog-box.component';
 import { DeleteUserDialogBoxComponent } from '../delete-user-dialog-box/delete-user-dialog-box.component';
+import { UpdateUserDialogBoxComponent } from '../update-user-dialog-box/update-user-dialog-box.component';
 
 @Component({
   selector: 'app-home',
@@ -41,8 +42,7 @@ export class HomeComponent implements OnInit {
     private store: Store<AppState>,
     private dialog: MatDialog,
     private route: Router,
-  ) {
-  }
+  ) {}
 
   userName: string = '';
   userId!: number;
@@ -109,7 +109,7 @@ export class HomeComponent implements OnInit {
 
   viewProject(projectId: number) {
     this.route.navigate(['/all-variables'], {
-      queryParams: {data: projectId},
+      queryParams: { data: projectId },
     });
   }
 
@@ -145,7 +145,7 @@ export class HomeComponent implements OnInit {
     if (this.showProjectsMoreOption) {
       this.clickedIndex = index;
     }
-    console.log("i : ", this.clickedIndex);
+    console.log('i : ', this.clickedIndex);
   }
 
   activeButton: string = 'allProjects';
@@ -161,14 +161,17 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  onUpdateProject(index: number) {
+  onUpdateProject() {
     this.dialog.open(UpdateProjectDialogBoxComponent, {
       width: '80%',
-      data: this.myProjects[index],
+      data: this.myProjects[this.clickedIndex as number],
     });
   }
 
   onUpdateUser() {
+    this.dialog.open(UpdateUserDialogBoxComponent, {
+      width: '80%',
+    });
   }
 
   onDeleteUser() {
@@ -176,6 +179,4 @@ export class HomeComponent implements OnInit {
       data: this.userId,
     });
   }
-
 }
-

@@ -1,224 +1,352 @@
-<nav class="fixed top-0 left-0 w-full flex flex-row justify-between
-    items-center bg-white py-4 px-2 sm:px-12 shadow-md z-10">
+<nav
+  class="fixed top-0 left-0 w-full flex flex-row justify-between items-center bg-white py-4 px-2 sm:px-12 shadow-md z-10"
+>
   <div class="flex flex-col text-left mb-4 sm:mb-0 max-sm:w-1/2">
-    <p class="text-sm sm:text-lg font-semibold font-poppins">Hello <span>{{userName}}</span>!</p>
-    <p class="text-xs sm:text-sm text-gray-600 font-poppins">Welcome to Name Flow, let's boost your developer experience</p>
+    <p class="text-sm sm:text-lg font-semibold font-poppins">
+      Hello <span>{{ userName }}</span
+      >!
+    </p>
+    <p class="text-xs sm:text-sm text-gray-600 font-poppins">
+      Welcome to Name Flow, let's boost your developer experience
+    </p>
   </div>
   <div class="flex items-center space-x-4 sm:space-x-16">
-    <p class="cursor-pointer font-poppins hover:font-bold" routerLink="/inbox">Inbox</p>
+    <p class="cursor-pointer font-poppins hover:font-bold" routerLink="/inbox">
+      Inbox
+    </p>
     <button (click)="onProfileClick()">
-      <img src="../../../assets/profile.svg" alt="Profile" class="w-8 h-8">
+      <img src="../../../assets/profile.svg" alt="Profile" class="w-8 h-8" />
     </button>
   </div>
 </nav>
 
 <section class="mt-[150px]">
-
-  <section class="fixed p-2 sm:p-4 top-[22%] sm:top-[40%] md:top-16 right-0 z-20" *ngIf="showProfile">
-    <div class="bg-white p-2 sm:p-4 rounded-lg shadow-md space-y-2 flex flex-col">
-      <button class="bg-blue-500 text-white px-2 py-1 sm:px-4 sm:py-2 rounded font-poppins">Update</button>
-      <button class="bg-red-500 text-white px-2 py-1 sm:px-4 sm:py-2 rounded font-poppins" (click)="onLogout()">Logout</button>
+  <section
+    class="fixed p-2 sm:p-4 top-[22%] sm:top-[40%] md:top-16 right-0 z-20"
+    *ngIf="showProfile"
+  >
+    <div
+      class="bg-white p-2 sm:p-4 rounded-lg shadow-md space-y-2 flex flex-col"
+    >
+      <button
+        class="bg-blue-500 text-white px-2 py-1 sm:px-4 sm:py-2 rounded font-poppins"
+        (click)="onUpdateUser()"
+      >
+        Update
+      </button>
+      <button
+        class="bg-red-500 text-white px-2 py-1 sm:px-4 sm:py-2 rounded font-poppins"
+        (click)="onLogout()"
+      >
+        Logout
+      </button>
     </div>
   </section>
 
-  <div class="flex flex-row justify-evenly sm:space-y-0 sm:space-x-4 p-4 text-center sm:text-left sm:text-lg text-xs">
-    <button [ngClass]="{'text-[#5779F1] font-poppins': activeButton === 'allProjects',
-    'hover:text-[#5779F1] font-poppins text-gray-600': activeButton !== 'allProjects'}"
-            class="font-semibold"
-            (click)="setActiveButton('allProjects')">
+  <div
+    class="flex flex-row justify-evenly sm:space-y-0 sm:space-x-4 p-4 text-center sm:text-left sm:text-lg text-xs"
+  >
+    <button
+      [ngClass]="{
+        'text-[#5779F1] font-poppins': activeButton === 'allProjects',
+        'hover:text-[#5779F1] font-poppins text-gray-600':
+          activeButton !== 'allProjects',
+      }"
+      class="font-semibold"
+      (click)="setActiveButton('allProjects')"
+    >
       All Projects
     </button>
-    <button [ngClass]="{'text-[#5779F1] font-poppins': activeButton === 'myProjects',
-    'hover:text-[#5779F1] font-poppins text-gray-600': activeButton !== 'myProjects'}"
-            class="font-semibold"
-            (click)="setActiveButton('myProjects')">
+    <button
+      [ngClass]="{
+        'text-[#5779F1] font-poppins': activeButton === 'myProjects',
+        'hover:text-[#5779F1] font-poppins text-gray-600':
+          activeButton !== 'myProjects',
+      }"
+      class="font-semibold"
+      (click)="setActiveButton('myProjects')"
+    >
       My Projects
     </button>
-    <button [ngClass]="{'text-[#5779F1] font-poppins': activeButton ==='accessProjects',
-    'hover:text-[#5779F1] font-poppins text-gray-600': activeButton !== 'accessProjects'}"
-            class="font-semibold"
-            (click)="setActiveButton('accessProjects')">
+    <button
+      [ngClass]="{
+        'text-[#5779F1] font-poppins': activeButton === 'accessProjects',
+        'hover:text-[#5779F1] font-poppins text-gray-600':
+          activeButton !== 'accessProjects',
+      }"
+      class="font-semibold"
+      (click)="setActiveButton('accessProjects')"
+    >
       Access Projects
     </button>
   </div>
 
   <section *ngIf="showAllProjects" class="py-5">
-
-    <div class="flex flex-col space-y-5 overflow-x-auto lg:justify-center lg:items-center mx-auto px-2">
-
-      <div class="border-b bg-[#F3F3F3] rounded-lg py-5 w-[90%] px-5 grid grid-cols-4
-        items-center max-xl:grid-cols-3 max-xl:w-[100%] max-sm:grid-cols-2 max-sm:px-1"
-           *ngFor="let project of myProjects; let i = index">
-
+    <div
+      class="flex flex-col space-y-5 overflow-x-auto lg:justify-center lg:items-center mx-auto px-2"
+    >
+      <div
+        class="border-b bg-[#F3F3F3] rounded-lg py-5 w-[90%] px-5 grid grid-cols-4 items-center max-xl:grid-cols-3 max-xl:w-[100%] max-sm:grid-cols-2 max-sm:px-1"
+        *ngFor="let project of myProjects; let i = index"
+      >
         <p class="font-poppins hidden">{{ i + 1 }}</p>
 
         <div class="flex flex-col">
-          <p class="font-poppins text-[#000000] opacity-[50%] max-sm:text-sm">Project Name</p>
-          <p class="font-bold font-poppins max-sm:text-sm break-words">{{ project.projectName }}</p>
+          <p class="font-poppins text-[#000000] opacity-[50%] max-sm:text-sm">
+            Project Name
+          </p>
+          <p class="font-bold font-poppins max-sm:text-sm break-words">
+            {{ project.projectName }}
+          </p>
         </div>
 
         <div class="flex flex-col max-xl:hidden">
-          <p class="font-poppins text-[#000000] opacity-[50%]">Project Tech Stack</p>
-          <p class="font-bold font-poppins break-words">{{ project.techStackDescription }}</p>
+          <p class="font-poppins text-[#000000] opacity-[50%]">
+            Project Tech Stack
+          </p>
+          <p class="font-bold font-poppins break-words">
+            {{ project.techStackDescription }}
+          </p>
         </div>
 
         <div class="flex flex-col max-sm:hidden">
-          <p class="font-poppins text-[#000000] opacity-[50%]">Project Contributors</p>
-          <p class="font-bold font-poppins break-words">{{ project.projectContributors }}</p>
+          <p class="font-poppins text-[#000000] opacity-[50%]">
+            Project Contributors
+          </p>
+          <p class="font-bold font-poppins break-words">
+            {{ project.projectContributors }}
+          </p>
         </div>
 
-        <div class="flex font-poppins space-x-5 justify-center items-center max-sm:space-x-1 max-sm:w-full">
-          <button class="bg-[#5779F1] text-white px-4 py-2 rounded w-[35%] font-poppins font-semibold
-                max-sm:px-2 max-sm:py-1 max-sm:font-medium"
-                  (click)="viewProject(project.id)">View</button>
-          <button class="bg-gray-500 text-white px-3 py-2 rounded max-sm:px-2 max-sm:py-1"
-                  (click)="onAccessProject(1, '800ms', '500ms')">
+        <div
+          class="flex font-poppins space-x-5 justify-center items-center max-sm:space-x-1 max-sm:w-full"
+        >
+          <button
+            class="bg-[#5779F1] text-white px-4 py-2 rounded w-[35%] font-poppins font-semibold max-sm:px-2 max-sm:py-1 max-sm:font-medium"
+            (click)="viewProject(project.id)"
+          >
+            View
+          </button>
+          <button
+            class="bg-gray-500 text-white px-3 py-2 rounded max-sm:px-2 max-sm:py-1"
+            (click)="onAccessProject(1, '800ms', '500ms')"
+          >
             <span class="max-sm:hidden">Provide </span>Access
           </button>
           <button (click)="onProjectsMoreOptionClick(i)" class="w-4 h-4">
-            <img src="../../../assets/three-dots-vertical-svgrepo-com.svg" alt="More">
+            <img
+              src="../../../assets/three-dots-vertical-svgrepo-com.svg"
+              alt="More"
+            />
           </button>
         </div>
-
       </div>
 
-      <div class="border-b bg-[#F3F3F3] rounded-lg py-5 w-[90%] px-5 grid grid-cols-4
-        items-center max-xl:grid-cols-3 max-xl:w-[100%] max-sm:grid-cols-2 max-sm:px-1"
-           *ngFor="let project of accessProjects; let i = index">
-
+      <div
+        class="border-b bg-[#F3F3F3] rounded-lg py-5 w-[90%] px-5 grid grid-cols-4 items-center max-xl:grid-cols-3 max-xl:w-[100%] max-sm:grid-cols-2 max-sm:px-1"
+        *ngFor="let project of accessProjects; let i = index"
+      >
         <p class="font-poppins hidden">{{ i + 1 }}</p>
 
         <div class="flex flex-col">
-          <p class="font-poppins text-[#000000] opacity-[50%] max-sm:text-sm">Project Name</p>
-          <p class="font-poppins font-bold max-sm:text-sm break-words">{{ project.projectName }}</p>
+          <p class="font-poppins text-[#000000] opacity-[50%] max-sm:text-sm">
+            Project Name
+          </p>
+          <p class="font-poppins font-bold max-sm:text-sm break-words">
+            {{ project.projectName }}
+          </p>
         </div>
 
         <div class="flex flex-col max-xl:hidden">
-          <p class="font-poppins text-[#000000] opacity-[50%]">Project Tech Stack</p>
-          <p class="font-poppins font-bold break-words">{{ project.techStackDescription }}</p>
+          <p class="font-poppins text-[#000000] opacity-[50%]">
+            Project Tech Stack
+          </p>
+          <p class="font-poppins font-bold break-words">
+            {{ project.techStackDescription }}
+          </p>
         </div>
 
         <div class="flex flex-col max-sm:hidden">
-          <p class="font-poppins text-[#000000] opacity-[50%]">Project Contributors</p>
-          <p class="font-poppins font-bold break-words">{{ project.projectContributors }}</p>
+          <p class="font-poppins text-[#000000] opacity-[50%]">
+            Project Contributors
+          </p>
+          <p class="font-poppins font-bold break-words">
+            {{ project.projectContributors }}
+          </p>
         </div>
 
-        <div class="flex font-poppins justify-center items-center space-x-5 max-sm:space-x-1 max-sm:w-full">
-          <button class="bg-[#5779F1] text-white px-4 py-2 rounded w-[35%] font-poppins font-semibold
-              max-sm:px-2 max-sm:py-1 max-sm:font-medium"
-                  (click)="viewProject(project.id)">View</button>
-          <button class="bg-gray-500 text-white px-3 py-2 rounded
-              max-sm:px-2 max-sm:py-1"
-                  (click)="onAccessProject(i, '800ms', '500ms')">
+        <div
+          class="flex font-poppins justify-center items-center space-x-5 max-sm:space-x-1 max-sm:w-full"
+        >
+          <button
+            class="bg-[#5779F1] text-white px-4 py-2 rounded w-[35%] font-poppins font-semibold max-sm:px-2 max-sm:py-1 max-sm:font-medium"
+            (click)="viewProject(project.id)"
+          >
+            View
+          </button>
+          <button
+            class="bg-gray-500 text-white px-3 py-2 rounded max-sm:px-2 max-sm:py-1"
+            (click)="onAccessProject(i, '800ms', '500ms')"
+          >
             <span class="max-sm:hidden">Provide </span>Access
           </button>
           <button (click)="onProjectsMoreOptionClick(i)" class="w-4 h-4">
-            <img src="../../../assets/three-dots-vertical-svgrepo-com.svg" alt="More">
+            <img
+              src="../../../assets/three-dots-vertical-svgrepo-com.svg"
+              alt="More"
+            />
           </button>
         </div>
-
       </div>
-
     </div>
   </section>
 
   <section *ngIf="showMyProjects" class="py-5">
-    <div class="flex flex-col space-y-5 overflow-x-auto lg:justify-center lg:items-center mx-auto px-2">
-
-      <div class="border-b bg-[#F3F3F3] rounded-lg py-5 w-[90%] px-5 grid grid-cols-4
-        items-center max-xl:grid-cols-3 max-xl:w-[100%] max-sm:grid-cols-2 max-sm:px-1"
-           *ngFor="let project of myProjects; let i = index">
-
+    <div
+      class="flex flex-col space-y-5 overflow-x-auto lg:justify-center lg:items-center mx-auto px-2"
+    >
+      <div
+        class="border-b bg-[#F3F3F3] rounded-lg py-5 w-[90%] px-5 grid grid-cols-4 items-center max-xl:grid-cols-3 max-xl:w-[100%] max-sm:grid-cols-2 max-sm:px-1"
+        *ngFor="let project of myProjects; let i = index"
+      >
         <p class="font-poppins hidden">{{ i + 1 }}</p>
 
         <div class="flex flex-col">
-          <p class="font-poppins text-[#000000] opacity-[50%] max-sm:text-sm">Project Name</p>
-          <p class="font-bold font-poppins max-sm:text-sm break-words">{{ project.projectName }}</p>
+          <p class="font-poppins text-[#000000] opacity-[50%] max-sm:text-sm">
+            Project Name
+          </p>
+          <p class="font-bold font-poppins max-sm:text-sm break-words">
+            {{ project.projectName }}
+          </p>
         </div>
 
         <div class="flex flex-col max-xl:hidden">
-          <p class="font-poppins text-[#000000] opacity-[50%]">Project Tech Stack</p>
-          <p class="font-bold font-poppins break-words">{{ project.techStackDescription }}</p>
+          <p class="font-poppins text-[#000000] opacity-[50%]">
+            Project Tech Stack
+          </p>
+          <p class="font-bold font-poppins break-words">
+            {{ project.techStackDescription }}
+          </p>
         </div>
 
         <div class="flex flex-col max-sm:hidden">
-          <p class="font-poppins text-[#000000] opacity-[50%]">Project Contributors</p>
-          <p class="font-bold font-poppins break-words">{{ project.projectContributors }}</p>
+          <p class="font-poppins text-[#000000] opacity-[50%]">
+            Project Contributors
+          </p>
+          <p class="font-bold font-poppins break-words">
+            {{ project.projectContributors }}
+          </p>
         </div>
 
-        <div class="flex font-poppins space-x-5 justify-center items-center max-sm:space-x-1 max-sm:w-full">
-          <button class="bg-[#5779F1] text-white px-4 py-2 rounded w-[35%] font-poppins font-semibold
-                max-sm:px-2 max-sm:py-1 max-sm:font-medium"
-                  (click)="viewProject(project.id)">View</button>
-          <button class="bg-gray-500 text-white px-3 py-2 rounded max-sm:px-2 max-sm:py-1"
-                  (click)="onAccessProject(1, '800ms', '500ms')">
+        <div
+          class="flex font-poppins space-x-5 justify-center items-center max-sm:space-x-1 max-sm:w-full"
+        >
+          <button
+            class="bg-[#5779F1] text-white px-4 py-2 rounded w-[35%] font-poppins font-semibold max-sm:px-2 max-sm:py-1 max-sm:font-medium"
+            (click)="viewProject(project.id)"
+          >
+            View
+          </button>
+          <button
+            class="bg-gray-500 text-white px-3 py-2 rounded max-sm:px-2 max-sm:py-1"
+            (click)="onAccessProject(1, '800ms', '500ms')"
+          >
             <span class="max-sm:hidden">Provide </span>Access
           </button>
           <button (click)="onProjectsMoreOptionClick(i)" class="w-4 h-4">
-            <img src="../../../assets/three-dots-vertical-svgrepo-com.svg" alt="More">
+            <img
+              src="../../../assets/three-dots-vertical-svgrepo-com.svg"
+              alt="More"
+            />
           </button>
         </div>
-
       </div>
-
     </div>
   </section>
 
   <section *ngIf="showAccessProject" class="py-5">
-
-    <div class="flex flex-col space-y-5 overflow-x-auto lg:justify-center lg:items-center mx-auto px-2">
-
-      <div class="border-b bg-[#F3F3F3] rounded-lg py-5 w-[90%] px-5 grid grid-cols-4
-        items-center max-xl:grid-cols-3 max-xl:w-[100%] max-sm:grid-cols-2 max-sm:px-1"
-           *ngFor="let project of accessProjects; let i = index">
-
+    <div
+      class="flex flex-col space-y-5 overflow-x-auto lg:justify-center lg:items-center mx-auto px-2"
+    >
+      <div
+        class="border-b bg-[#F3F3F3] rounded-lg py-5 w-[90%] px-5 grid grid-cols-4 items-center max-xl:grid-cols-3 max-xl:w-[100%] max-sm:grid-cols-2 max-sm:px-1"
+        *ngFor="let project of accessProjects; let i = index"
+      >
         <p class="font-poppins hidden">{{ i + 1 }}</p>
 
         <div class="flex flex-col">
-          <p class="font-poppins text-[#000000] opacity-[50%] max-sm:text-sm">Project Name</p>
-          <p class="font-poppins font-bold max-sm:text-sm break-words">{{ project.projectName }}</p>
+          <p class="font-poppins text-[#000000] opacity-[50%] max-sm:text-sm">
+            Project Name
+          </p>
+          <p class="font-poppins font-bold max-sm:text-sm break-words">
+            {{ project.projectName }}
+          </p>
         </div>
 
         <div class="flex flex-col max-xl:hidden">
-          <p class="font-poppins text-[#000000] opacity-[50%]">Project Tech Stack</p>
-          <p class="font-poppins font-bold break-words">{{ project.techStackDescription }}</p>
+          <p class="font-poppins text-[#000000] opacity-[50%]">
+            Project Tech Stack
+          </p>
+          <p class="font-poppins font-bold break-words">
+            {{ project.techStackDescription }}
+          </p>
         </div>
 
         <div class="flex flex-col max-sm:hidden">
-          <p class="font-poppins text-[#000000] opacity-[50%]">Project Contributors</p>
-          <p class="font-poppins font-bold break-words">{{ project.projectContributors }}</p>
+          <p class="font-poppins text-[#000000] opacity-[50%]">
+            Project Contributors
+          </p>
+          <p class="font-poppins font-bold break-words">
+            {{ project.projectContributors }}
+          </p>
         </div>
 
-        <div class="flex font-poppins justify-center items-center space-x-5 max-sm:space-x-1 max-sm:w-full">
-          <button class="bg-[#5779F1] text-white px-4 py-2 rounded w-[35%] font-poppins font-semibold
-              max-sm:px-2 max-sm:py-1 max-sm:font-medium"
-                  (click)="viewProject(project.id)">View</button>
-          <button class="bg-gray-500 text-white px-3 py-2 rounded
-              max-sm:px-2 max-sm:py-1"
-                  (click)="onAccessProject(i, '800ms', '500ms')">
+        <div
+          class="flex font-poppins justify-center items-center space-x-5 max-sm:space-x-1 max-sm:w-full"
+        >
+          <button
+            class="bg-[#5779F1] text-white px-4 py-2 rounded w-[35%] font-poppins font-semibold max-sm:px-2 max-sm:py-1 max-sm:font-medium"
+            (click)="viewProject(project.id)"
+          >
+            View
+          </button>
+          <button
+            class="bg-gray-500 text-white px-3 py-2 rounded max-sm:px-2 max-sm:py-1"
+            (click)="onAccessProject(i, '800ms', '500ms')"
+          >
             <span class="max-sm:hidden">Provide </span>Access
           </button>
-          <button (click)="onProjectsMoreOptionClick()" class="w-4 h-4">
-            <img src="../../../assets/three-dots-vertical-svgrepo-com.svg" alt="More">
+          <button (click)="onProjectsMoreOptionClick(i)" class="w-4 h-4">
+            <img
+              src="../../../assets/three-dots-vertical-svgrepo-com.svg"
+              alt="More"
+            />
           </button>
         </div>
-
       </div>
-
     </div>
   </section>
 
   <section *ngIf="showProjectsMoreOption">
-    <div class="fixed top-[24%] sm:top-36 md:top-24 right-0 flex flex-col
-        bg-white p-2 sm:p-4 rounded-lg shadow-md space-y-1 sm:space-y-2 z-20">
-      <button class="bg-blue-500 text-white px-2 py-1 sm:px-4 sm:py-2 rounded">Update</button>
-      <button class="bg-gray-500 text-white px-2 py-1 m:px-4 sm:py-2 rounded">Manage Access</button>
+    <div
+      class="fixed top-[24%] sm:top-36 md:top-24 right-0 flex flex-col bg-white p-2 sm:p-4 rounded-lg shadow-md space-y-1 sm:space-y-2 z-20"
+    >
+      <button
+        class="bg-blue-500 text-white px-2 py-1 sm:px-4 sm:py-2 rounded"
+        (click)="onUpdateProject()"
+      >
+        Update
+      </button>
+      <button class="bg-gray-500 text-white px-2 py-1 m:px-4 sm:py-2 rounded">
+        Manage Access
+      </button>
     </div>
   </section>
 
-  <button class="fixed max-lg:bottom-[10%] max-lg:right-[10%] right-[2%] bottom-[3%] bg-blue-500 text-white px-4 py-2 lg:px-6 lg:py-4 rounded sm:font-semibold"
-            (click)="onCreateNewProject('800ms', '500ms')">
+  <button
+    class="fixed max-lg:bottom-[10%] max-lg:right-[10%] right-[2%] bottom-[3%] bg-blue-500 text-white px-4 py-2 lg:px-6 lg:py-4 rounded sm:font-semibold"
+    (click)="onCreateNewProject('800ms', '500ms')"
+  >
     Create Project
   </button>
-
 </section>
