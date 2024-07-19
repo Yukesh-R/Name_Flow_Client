@@ -1,5 +1,16 @@
 <form [formGroup]="accessForm" (ngSubmit)="onAccessFormSubmit()">
-  <input type="text" placeholder="Enter the Your Contributor Email"
-  formControlName="mailToRelation">
-  <button>SUBMIT</button>
+  <input
+    type="text"
+    placeholder="Enter the Your Contributor Email"
+    formControlName="emailToRelation"
+  />
+  <div
+    *ngIf="
+      accessForm.controls['emailToRelation'].invalid && isSubmittedAccessForm
+    "
+  >
+    Contributor Email Cannot be Empty
+  </div>
+  <button>Submit</button>
+  <button>Cancel</button>
 </form>
