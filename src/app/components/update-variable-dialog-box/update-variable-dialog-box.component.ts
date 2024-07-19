@@ -10,11 +10,12 @@ import {
 } from '@angular/forms';
 import { VariableNameService } from '../../services/variableName/variable-name.service';
 import { ResponseModel } from '../../models/response.model';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-update-variable-dialog-box',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, NgIf],
   templateUrl: './update-variable-dialog-box.component.html',
   styleUrl: './update-variable-dialog-box.component.css',
 })
@@ -25,6 +26,7 @@ export class UpdateVariableDialogBoxComponent implements OnInit {
   userId!: number;
   projectId!: number;
   variableId!: number;
+  isSubmittedUpdateForm: boolean = false;
 
   constructor(private variableNameService: VariableNameService) {}
 
@@ -48,6 +50,8 @@ export class UpdateVariableDialogBoxComponent implements OnInit {
   });
 
   updateVariable() {
+    this.isSubmittedUpdateForm = true;
+    this.updateVariableForm.markAsTouched();
     let updateVariableModel: UpdateVariableModel = {
       userId: this.userId,
       projectId: this.projectId,

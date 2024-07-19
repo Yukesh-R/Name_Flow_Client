@@ -1,25 +1,55 @@
 <form [formGroup]="createProjectForm">
-
   <input
     type="text"
     placeholder="Enter Your Project Name"
     formControlName="projectName"
   />
+  <div
+    *ngIf="
+      createProjectForm.controls['projectName'].invalid &&
+      isSubmittedCreateProjectForm
+    "
+  >
+    Project Name Cannot be Empty
+  </div>
   <input
     type="text"
     placeholder="Enter Your Project Description"
     formControlName="projectDescription"
   />
+  <div
+    *ngIf="
+      createProjectForm.controls['projectDescription'].invalid &&
+      isSubmittedCreateProjectForm
+    "
+  >
+    Project Description Cannot be Empty
+  </div>
   <input
     type="text"
     placeholder="Enter Your TechStack"
     formControlName="techStackDescription"
   />
+  <div
+    *ngIf="
+      createProjectForm.controls['techStackDescription'].invalid &&
+      isSubmittedCreateProjectForm
+    "
+  >
+    Project TechStackDescription Cannot be Empty
+  </div>
   <input
     type="text"
     placeholder="Enter Your ProjectContributors"
     formControlName="projectContributors"
   />
-  <button mat-dialog-close (click)="onCreateProjectFormSubmit()">CREATE</button>
-
+  <div
+    *ngIf="
+      createProjectForm.controls['projectContributors'].invalid &&
+      isSubmittedCreateProjectForm
+    "
+  >
+    Project Contributors Cannot be Empty
+  </div>
+  <button mat-dialog-close (click)="onCreateProjectFormSubmit()">Create</button>
 </form>

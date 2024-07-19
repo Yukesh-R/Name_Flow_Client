@@ -3,18 +3,49 @@
     formControlName="variableName"
     placeholder="Enter your New Variable Name"
   />
+  <div
+    *ngIf="
+      updateVariableForm.controls['variableName'].invalid &&
+      isSubmittedUpdateForm
+    "
+  >
+    Variable Name Cannot be Empty
+  </div>
   <input
     formControlName="dataType"
     placeholder="Enter the Data Type of the Variable"
   />
+  <div
+    *ngIf="
+      updateVariableForm.controls['dataType'].invalid && isSubmittedUpdateForm
+    "
+  >
+    Variable Data Type Cannot be Empty
+  </div>
   <input
     formControlName="description"
     placeholder="Provide Some Details About it"
   />
+  <div
+    *ngIf="
+      updateVariableForm.controls['description'].invalid &&
+      isSubmittedUpdateForm
+    "
+  >
+    Variable Description Cannot be Empty
+  </div>
   <input
     formControlName="variableType"
     placeholder="Enter the Type of this Variable"
   />
+  <div
+    *ngIf="
+      updateVariableForm.controls['variableType'].invalid &&
+      isSubmittedUpdateForm
+    "
+  >
+    Variable Type Cannot be Empty
+  </div>
   <button (click)="updateVariable()">Update</button>
   <button (click)="closeDialog()">Cancel</button>
 </form>
