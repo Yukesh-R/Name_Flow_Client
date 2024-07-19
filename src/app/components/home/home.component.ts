@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectDataModel } from '../../models/project-data.model';
 import { ProjectService } from '../../services/projectServices/project-services.service';
-import { Store, StoreModule } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { AppState } from '../../store/state/app.state';
 import { userDetailsSelector } from '../../store/selector/user-details.selector';
 import { UserDetailsModel } from '../../models/user-details.model';
@@ -13,12 +13,13 @@ import { Router } from '@angular/router';
 import { RouterLink } from '@angular/router';
 import { UpdateProjectDialogBoxComponent } from '../update-project-dialog-box/update-project-dialog-box.component';
 import { DeleteUserDialogBoxComponent } from '../delete-user-dialog-box/delete-user-dialog-box.component';
-
 import { UpdateUserDialogBoxComponent } from '../update-user-dialog-box/update-user-dialog-box.component';
-
 import {ProjectDataPassModel} from "../../models/project-data-pass.model";
 import {InboxComponent} from "../inbox/inbox.component";
-
+import {
+  default as localForage,
+} from 'ngrx-store-persist';
+import {stateResetAction} from "../../store/action/state-reset.action";
 
 @Component({
   selector: 'app-home',
@@ -64,27 +65,21 @@ export class HomeComponent implements OnInit {
     this.projectService.getOwnProjects(userIdFromState).subscribe({
       next: (projectData: ProjectDataModel[]) => {
         this.myProjects = projectData;
-        console.log(this.myProjects);
       },
       error: (errorResponse: Error) => {
-        console.log(errorResponse);
       },
     });
     this.projectService.getAccessProject(userIdFromState).subscribe({
       next: (projectData: ProjectDataModel[]) => {
         this.accessProjects = projectData;
-        console.log(this.accessProjects);
       },
       error: (errorResponse: Error) => {
-        console.log(errorResponse);
       },
     });
   }
 
   ngOnInit() {
     this.getProjectsRefresh();
-    console.log(this.myProjects);
-    console.log(this.accessProjects);
   }
 
   onCreateNewProject(
@@ -122,14 +117,13 @@ export class HomeComponent implements OnInit {
       projectDescription : selectedProject.projectDescription
     }
     this.route.navigate(['/all-variables'], {
-
       queryParams: projectPass,
-
     });
   }
 
   onLogout() {
-    localStorage.clear();
+    localForage.clear();
+    this.store.dispatch(stateResetAction());
     this.route.navigate(['/']);
   }
 
@@ -160,7 +154,6 @@ export class HomeComponent implements OnInit {
     if (this.showProjectsMoreOption) {
       this.clickedIndex = index;
     }
-    console.log('i : ', this.clickedIndex);
   }
 
   activeButton: string = 'allProjects';

@@ -6,10 +6,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { UserService } from '../../services/userServices/user-services.service';
-import { Store } from '@ngrx/store';
-import { AppState } from '../../store/state/app.state';
-import { userDetailsSelector } from '../../store/selector/user-details.selector';
-import { UserDetailsModel } from '../../models/user-details.model';
 import { VerifyResetPasswordModel } from '../../models/verify-resetpassword.model';
 import { NgIf } from '@angular/common';
 
@@ -23,7 +19,6 @@ import { NgIf } from '@angular/common';
 export class ForgetPasswordComponent {
   constructor(
     private userService: UserService,
-    private store: Store<AppState>,
   ) {}
 
   isSubmittedEmailForm: boolean = false;
@@ -54,7 +49,6 @@ export class ForgetPasswordComponent {
   onEmailFormSubmit() {
     this.emailForm.markAsTouched();
     this.isSubmittedEmailForm = true;
-    console.log(this.emailForm.value.email!);
     if (this.emailForm.valid) {
       this.userService
         .forgetPasswordMailSend(this.emailForm.value.email!)
@@ -62,14 +56,11 @@ export class ForgetPasswordComponent {
           next: (response) => {
             if (response.status) {
               this.toggleShowResetPasswordForm(true);
-              console.log(response);
             } else {
               this.toggleShowResetPasswordForm(false);
-              console.log(response.message);
             }
           },
           error: (errorResponse) => {
-            console.log(errorResponse);
           },
         });
     }
@@ -84,17 +75,13 @@ export class ForgetPasswordComponent {
         activationCode: this.resetPasswordForm.value.activationCode!,
         newPassword: this.resetPasswordForm.value.newPassword!,
       };
-      console.log(resetPassword);
       this.userService.verifyAndResetPassword(resetPassword).subscribe({
         next: (response) => {
           if (response.status) {
-            console.log(response);
           } else {
-            console.log(response.message);
           }
         },
         error: (errorResponse) => {
-          console.log(errorResponse);
         },
       });
     }

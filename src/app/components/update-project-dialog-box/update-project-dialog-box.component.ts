@@ -24,7 +24,6 @@ export class UpdateProjectDialogBoxComponent implements OnInit {
   readonly dialogRef = inject(MatDialogRef<HomeComponent>);
   readonly data = inject<ProjectDataModel>(MAT_DIALOG_DATA);
   readonly projectDetails = model(this.data);
-  isSubmittedUpdateForm: boolean = false;
   constructor(private projectService: ProjectService) {}
 
   userId!: number;
@@ -61,16 +60,11 @@ export class UpdateProjectDialogBoxComponent implements OnInit {
     if (this.updateProjectForm.valid) {
       this.projectService.updateProject(updateProjectModel).subscribe({
         next: (response: ResponseModel) => {
-          console.log(response.message);
         },
         error: (error: Error) => {
-          console.log(error);
         },
       });
     }
   }
 
-  onClose() {
-    this.dialogRef.close();
-  }
 }

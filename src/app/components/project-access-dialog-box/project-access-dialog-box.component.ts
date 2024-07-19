@@ -57,13 +57,10 @@ export class ProjectAccessDialogBoxComponent {
     this.projectService.createRelationship(newAccess).subscribe({
       next: (response: ResponseModel) => {
         if (response.status) {
-          console.log(response);
         } else {
-          console.log(response.message);
         }
       },
       error: (errorResponse) => {
-        console.log(errorResponse);
       },
     });
   }

@@ -5,19 +5,20 @@ import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import {provideHttpClient, withFetch, withInterceptors} from "@angular/common/http";
 import {httpInterceptor} from "./interceptor/http.interceptor";
-import { provideStore, StoreModule } from '@ngrx/store';
+import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
-import {metaReducers, reducers} from "./store/reducer/main.reducer";
+import {reducers} from "./store/reducer/main.reducer";
 import {AuthenticationEffect} from "./store/effect/authentication.effect";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import {storageSyncMetaReducer} from "ngrx-store-persist";
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideClientHydration(),
     provideHttpClient(withInterceptors([httpInterceptor]), withFetch()),
-    provideStore(reducers,{metaReducers}),
+    provideStore(reducers,{metaReducers : [storageSyncMetaReducer]}),
     provideEffects([
       AuthenticationEffect,
     ]),

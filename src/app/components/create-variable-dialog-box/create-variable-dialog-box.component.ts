@@ -71,31 +71,17 @@ export class CreateVariableDialogBoxComponent implements OnInit {
 
     this.variableNameService.createVariableAI(createVariableAIModel).subscribe({
       next: (response: ResponseModel) => {
-        console.log(response.message);
       },
       error: (error: Error) => {
-        console.log(error);
       },
     });
   }
 
-  closeDialog() {
-    this.dialogRef.close();
-  }
-
   isOtherVarTypeCheck() {
-    if (this.createVariableAIForm.value.variableType == 'others') {
-      this.isOtherVarTypeSelected = true;
-    } else {
-      this.isOtherVarTypeSelected = false;
-    }
+    this.isOtherVarTypeSelected = this.createVariableAIForm.value.variableType == 'others';
   }
 
   isOtherDataTypeCheck() {
-    if (this.createVariableAIForm.value.dataType == 'others') {
-      this.isOtherDataTypeSelected = true;
-    } else {
-      this.isOtherDataTypeSelected = false;
-    }
+    this.isOtherDataTypeSelected = this.createVariableAIForm.value.dataType == 'others';
   }
 }

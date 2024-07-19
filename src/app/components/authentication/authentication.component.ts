@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -9,8 +9,6 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../store/state/app.state';
 import { AuthenticationRequestModel } from '../../models/authentication-request.model';
 import { authenticationAction } from '../../store/action/authentication.action';
-import { userDetailsSelector } from '../../store/selector/user-details.selector';
-import { UserDetailsModel } from '../../models/user-details.model';
 import { RouterLink } from '@angular/router';
 import { NgIf } from '@angular/common';
 
@@ -54,11 +52,5 @@ export class AuthenticationComponent {
         authRequest: loginRequest,
       }),
     );
-
-    this.store
-      .select(userDetailsSelector)
-      .subscribe((userDetails: UserDetailsModel) => {
-        console.log(userDetails);
-      });
   }
 }

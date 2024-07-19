@@ -5,6 +5,7 @@ import {
   authenticationFailAction,
   authenticationSuccessAction
 } from "../action/authentication.action";
+import {stateResetAction} from "../action/state-reset.action";
 
 const _userDetailsReducer = createReducer(userDetails,
 
@@ -37,6 +38,22 @@ const _userDetailsReducer = createReducer(userDetails,
       errorMessage : action.errorMessage
     }
   }),
+
+  on(stateResetAction, (state, action) => {
+    return {
+      ...state,
+      userId : -1,
+      firstName : "",
+      lastName : "",
+      gender : "",
+      age : -1,
+      mobileNumber : "",
+      email : "",
+      role : "",
+      errorMessage : "",
+      jwtToken : ""
+    }
+  })
 
 )
 

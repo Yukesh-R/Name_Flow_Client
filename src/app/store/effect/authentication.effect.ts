@@ -10,6 +10,7 @@ import { catchError, map, mergeMap, of } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable()
+
 export class AuthenticationEffect {
   constructor(
     private actions$: Actions,
@@ -23,12 +24,7 @@ export class AuthenticationEffect {
       mergeMap((action) =>
         this.userService.authenticate(action.authRequest).pipe(
           map((authenticationResponseDTO) => {
-            console.log(authenticationResponseDTO);
             if (authenticationResponseDTO != null) {
-              localStorage.setItem(
-                'jwtToken',
-                authenticationResponseDTO.jwtToken,
-              );
               this.router.navigate(['/home']).then((status) => true);
               return authenticationSuccessAction({
                 userId: authenticationResponseDTO.userId,

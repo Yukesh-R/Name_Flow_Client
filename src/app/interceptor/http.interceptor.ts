@@ -11,7 +11,6 @@ export const httpInterceptor: HttpInterceptorFn = (req, next)  => {
     .select(userDetailsSelector)
     .subscribe((userDetails: UserDetailsModel) => {
       jwtToken = userDetails.jwtToken;
-    
     });
 
     const cloneRequest = req.clone({
@@ -22,10 +21,10 @@ export const httpInterceptor: HttpInterceptorFn = (req, next)  => {
 
     return next(cloneRequest);
 
-  
-
-    
 
 
-  
+
+
+
+
 };

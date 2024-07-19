@@ -45,10 +45,8 @@ export class InboxComponent implements OnInit{
       .subscribe({
         next: (accessProviders : AccessProviderModel[]) => {
           this.accessProvidersList=accessProviders;
-          console.log("Access : ",this.accessProvidersList);
         },
         error: (err : Error) => {
-          console.log(err);
         }
       })
   }
@@ -66,22 +64,16 @@ export class InboxComponent implements OnInit{
       accessProjectId : accessProvider.accessProjectId,
     }
 
-    console.log("paylode : ",accessAccept);
-
     this.projectService.relationAccessAcceptance(accessAccept)
       .subscribe({
         next: (response : ResponseModel) => {
           if(response.status){
-            console.log("Access Accepted Successfull");
           }else{
-            console.log(response.message);
           }
         },
         error: (errorResponse : Error) => {
-          console.log(errorResponse);
         }
       })
-
   }
 
 }

@@ -8,7 +8,7 @@ import {
 import { UserService } from '../../services/userServices/user-services.service';
 import { RegistrationRequestModel } from '../../models/registration-request.model';
 import { NgIf } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -19,7 +19,10 @@ import { RouterLink } from '@angular/router';
   styleUrl: './registration.component.css',
 })
 export class RegistrationComponent {
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private router: Router,
+  ) {}
 
   isSubmittedEmailForm: boolean = false;
   isSubmittedRegistrationForm: boolean = false;
@@ -62,14 +65,11 @@ export class RegistrationComponent {
           next: (response) => {
             if (response.status) {
               this.toggleShowRegistrationForm(true);
-              console.log(response);
             } else {
               this.toggleShowRegistrationForm(false);
-              console.log(response.message);
             }
           },
           error: (errorResponse) => {
-            console.log(errorResponse);
           },
         });
     }
@@ -93,13 +93,11 @@ export class RegistrationComponent {
       this.userService.verifyActivationCode(registrationRequest).subscribe({
         next: (response) => {
           if (response.status) {
-            console.log(response);
+            this.router.navigate(['/']);
           } else {
-            console.log(response.message);
           }
         },
         error: (errorResponse) => {
-          console.log(errorResponse);
         },
       });
     }

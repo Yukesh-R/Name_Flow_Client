@@ -56,7 +56,6 @@ export class VariablesComponent implements OnInit {
         this.allVariables = data;
       },
       error: (error: Error) => {
-        console.log(error);
       },
     });
   }

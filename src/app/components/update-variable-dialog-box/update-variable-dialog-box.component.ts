@@ -62,19 +62,12 @@ export class UpdateVariableDialogBoxComponent implements OnInit {
       variableType: this.updateVariableForm.value.variableType,
     };
 
-    console.log(updateVariableModel, 'from method');
-
     this.variableNameService.updateVariable(updateVariableModel).subscribe({
       next: (data: ResponseModel) => {
-        console.log(data.message);
       },
       error: (error: Error) => {
-        console.log(error);
       },
     });
   }
 
-  closeDialog() {
-    this.dialogRef.close();
-  }
 }

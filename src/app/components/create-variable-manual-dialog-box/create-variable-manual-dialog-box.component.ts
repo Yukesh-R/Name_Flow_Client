@@ -76,31 +76,17 @@ export class CreateVariableManualDialogBoxComponent implements OnInit {
       .createVariableManual(createVariableManualModel)
       .subscribe({
         next: (response: ResponseModel) => {
-          console.log(response);
         },
         error: (error: Error) => {
-          console.log(error);
         },
       });
   }
 
-  closeDialog() {
-    this.dialogRef.close();
-  }
-
   isOtherDataTypeSelectedCheck() {
-    if (this.createVariableManualForm.value.dataType == 'others') {
-      this.isOtherDataTypeSelected = true;
-    } else {
-      this.isOtherDataTypeSelected = false;
-    }
+    this.isOtherDataTypeSelected = this.createVariableManualForm.value.dataType == 'others';
   }
 
   isOtherVarTypeSelectedCheck() {
-    if (this.createVariableManualForm.value.variableType == 'others') {
-      this.isOtherVarTypeSelected = true;
-    } else {
-      this.isOtherVarTypeSelected = false;
-    }
+    this.isOtherVarTypeSelected = this.createVariableManualForm.value.variableType == 'others';
   }
 }

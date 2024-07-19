@@ -24,7 +24,7 @@ export class DeleteVariableDialogBoxComponent implements OnInit {
   readonly variableDetails = model(this.data);
 
   deleteVariable() {
-    console.log(this.data);
+
     let deleteVariableModel: DeleteVariableModel = {
       userId: this.data.userId,
       projectId: this.data.projectId,
@@ -32,15 +32,10 @@ export class DeleteVariableDialogBoxComponent implements OnInit {
     };
     this.variableNameService.deleteVariable(deleteVariableModel).subscribe({
       next: (response: ResponseModel) => {
-        console.log(response.message);
       },
       error: (error: Error) => {
-        console.log(error);
       },
     });
   }
 
-  closeDialog() {
-    this.dialogRef.close();
-  }
 }

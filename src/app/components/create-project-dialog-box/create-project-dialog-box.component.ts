@@ -58,13 +58,10 @@ export class CreateProjectDialogBoxComponent {
       this.projectService.createProject(newProject).subscribe({
         next: (response: ResponseModel) => {
           if (response.status) {
-            console.log(response);
           } else {
-            console.log(response.message);
           }
         },
         error: (errorResponse: Error) => {
-          console.log(errorResponse);
         },
       });
     }
