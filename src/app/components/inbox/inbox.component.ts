@@ -8,12 +8,14 @@ import {AccessProviderModel} from "../../models/access-provider.model";
 import {NgForOf} from "@angular/common";
 import {AccessAcceptModel} from "../../models/access-accept.model";
 import {ResponseModel} from "../../models/response.model";
+import {MatDialogClose} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-inbox',
   standalone: true,
   imports: [
-    NgForOf
+    NgForOf,
+    MatDialogClose
   ],
   templateUrl: './inbox.component.html',
   styleUrl: './inbox.component.css'
