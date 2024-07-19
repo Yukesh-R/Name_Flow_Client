@@ -1,7 +1,7 @@
 import { Component, OnInit, inject, model } from '@angular/core';
 import { VariablesComponent } from '../variables/variables.component';
 import { UpdateVariableModel } from '../../models/update-variable-model.model';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogClose, MatDialogRef} from '@angular/material/dialog';
 import {
   FormControl,
   FormGroup,
@@ -15,7 +15,7 @@ import { NgIf } from '@angular/common';
 @Component({
   selector: 'app-update-variable-dialog-box',
   standalone: true,
-  imports: [ReactiveFormsModule, NgIf],
+    imports: [ReactiveFormsModule, NgIf, MatDialogClose],
   templateUrl: './update-variable-dialog-box.component.html',
   styleUrl: './update-variable-dialog-box.component.css',
 })

@@ -1,51 +1,99 @@
-<form [formGroup]="updateVariableForm">
-  <input
-    formControlName="variableName"
-    placeholder="Enter your New Variable Name"
-  />
-  <div
-    *ngIf="
-      updateVariableForm.controls['variableName'].invalid &&
-      isSubmittedUpdateForm
-    "
-  >
-    Variable Name Cannot be Empty
-  </div>
-  <input
-    formControlName="dataType"
-    placeholder="Enter the Data Type of the Variable"
-  />
-  <div
-    *ngIf="
-      updateVariableForm.controls['dataType'].invalid && isSubmittedUpdateForm
-    "
-  >
-    Variable Data Type Cannot be Empty
-  </div>
-  <input
-    formControlName="description"
-    placeholder="Provide Some Details About it"
-  />
-  <div
-    *ngIf="
-      updateVariableForm.controls['description'].invalid &&
-      isSubmittedUpdateForm
-    "
-  >
-    Variable Description Cannot be Empty
-  </div>
-  <input
-    formControlName="variableType"
-    placeholder="Enter the Type of this Variable"
-  />
-  <div
-    *ngIf="
-      updateVariableForm.controls['variableType'].invalid &&
-      isSubmittedUpdateForm
-    "
-  >
-    Variable Type Cannot be Empty
-  </div>
-  <button (click)="updateVariable()">Update</button>
-  <button (click)="closeDialog()">Cancel</button>
-</form>
+<div class="px-2 py-2">
+
+  <button class="w-10 h-10 items-start sm:mx-10 mx-2 mt-[2%]" mat-dialog-close>
+    <img src="../../../assets/back-arrow-svgrepo-com.svg" alt="">
+  </button>
+
+  <p class="text-xl font-bold text-center font-poppins my-[2%]">Update Project Details</p>
+
+  <form [formGroup]="updateVariableForm"
+        class="flex flex-col space-y-2 xl:space-y-6 items-center mx-auto w-[90%]">
+
+    <div class="flex flex-col w-[80%] space-y-1">
+      <label class="font-poppins font-medium">Variable Name</label>
+      <input
+        formControlName="variableName"
+        placeholder="Enter your New Variable Name"
+        class="border-gray-400 border-2 px-2 py-2 rounded-lg hover:border-gray-500 font-poppins
+        text-xs md:py-4 md:px-4"
+      />
+      <div
+        *ngIf="
+          updateVariableForm.controls['variableName'].invalid &&
+          isSubmittedUpdateForm
+        "
+        class="text-sm text-red-500"
+      >
+        Variable Name Cannot be Empty
+      </div>
+    </div>
+
+    <div class="flex flex-col w-[80%] space-y-1">
+      <label class="font-poppins font-medium">Data Type</label>
+      <input
+        formControlName="dataType"
+        placeholder="Enter the Data Type of the Variable"
+        class="border-gray-400 border-2 px-2 py-2 rounded-lg hover:border-gray-500 font-poppins
+        text-xs md:py-4 md:px-4"
+      />
+      <div
+        *ngIf="
+          updateVariableForm.controls['dataType'].invalid && isSubmittedUpdateForm
+        "
+        class="text-sm text-red-500"
+      >
+        Variable Data Type Cannot be Empty
+      </div>
+    </div>
+
+    <div class="flex flex-col w-[80%] space-y-1">
+      <label class="font-poppins font-medium">Description</label>
+      <input
+        formControlName="description"
+        placeholder="Provide Some Details About it"
+        class="border-gray-400 border-2 px-2 py-2 rounded-lg hover:border-gray-500 font-poppins
+        text-xs md:py-4 md:px-4"
+      />
+      <div
+        *ngIf="
+          updateVariableForm.controls['description'].invalid &&
+          isSubmittedUpdateForm
+        "
+        class="text-sm text-red-500"
+      >
+        Variable Description Cannot be Empty
+      </div>
+    </div>
+
+    <div class="flex flex-col w-[80%] space-y-1">
+      <label class="font-poppins font-medium">Variable Type</label>
+      <input
+        formControlName="variableType"
+        placeholder="Enter the Type of this Variable"
+        class="border-gray-400 border-2 px-2 py-2 rounded-lg hover:border-gray-500 font-poppins
+        text-xs md:py-4 md:px-4"
+      />
+      <div
+        *ngIf="
+          updateVariableForm.controls['variableType'].invalid &&
+          isSubmittedUpdateForm
+        "
+        class="text-sm text-red-500"
+      >
+        Variable Type Cannot be Empty
+      </div>
+    </div>
+
+    <div class="flex space-x-5">
+      <button (click)="updateVariable()"
+              class="bg-[#5779F1] text-white px-3 py-2 rounded-lg font-poppins">
+        Update
+      </button>
+      <button (click)="closeDialog()"
+              class="bg-[#D9D9D9] text-black px-3 py-2 rounded-lg font-poppins">
+        Cancel
+      </button>
+    </div>
+  </form>
+
+</div>

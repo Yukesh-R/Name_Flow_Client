@@ -4,7 +4,7 @@
     <img src="../../../assets/back-arrow-svgrepo-com.svg" alt="">
   </button>
 
-  <p class="text-xl font-bold text-center font-poppins my-[2%]">Create You Own variable</p>
+  <p class="text-xl font-bold text-center font-poppins my-[2%]">Create You AI variable</p>
 
   <form [formGroup]="createVariableAIForm"
         class="flex flex-col space-y-2 xl:space-y-6 items-center mx-auto w-full">
@@ -63,7 +63,7 @@
     <form [formGroup]="otherVarTypeSelectedForm" *ngIf="isOtherVarTypeSelected"
           class="flex flex-col space-y-2 xl:space-y-6 items-center mx-auto w-full">
       <div class="flex flex-col w-full md:w-[80%] space-y-1" *ngIf="isOtherDataTypeSelected">
-        <label class="font-poppins font-medium">Other Data type</label>
+        <label class="font-poppins font-medium">Other Variable type</label>
         <input
           placeholder="Enter the type of your Variable"
           type="text"
