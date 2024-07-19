@@ -11,7 +11,6 @@ export const routes: Routes = [
   {path : 'register',component : RegistrationComponent},
   {path : 'forget-password',component : ForgetPasswordComponent},
   {path : 'home',component:HomeComponent},
-  {path : 'inbox',component:InboxComponent},
   {
     path: 'all-variables',
     component: VariablesComponent,

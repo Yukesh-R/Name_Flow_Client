@@ -5,7 +5,8 @@
     <p class="text-xs sm:text-sm text-gray-600 font-poppins">Welcome to Name Flow, let's boost your developer experience</p>
   </div>
   <div class="flex items-center space-x-4 sm:space-x-16">
-    <p class="cursor-pointer font-poppins hover:font-bold" routerLink="/inbox">Inbox</p>
+    <p class="cursor-pointer font-poppins hover:font-bold"
+       (click)="openInbox('800ms','500ms')">Inbox</p>
     <button (click)="onProfileClick()">
       <img src="../../../assets/profile.svg" alt="Profile" class="w-8 h-8">
     </button>

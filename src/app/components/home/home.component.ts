@@ -14,6 +14,7 @@ import { RouterLink } from '@angular/router';
 import { UpdateProjectDialogBoxComponent } from '../update-project-dialog-box/update-project-dialog-box.component';
 import { DeleteUserDialogBoxComponent } from '../delete-user-dialog-box/delete-user-dialog-box.component';
 import {ProjectDataPassModel} from "../../models/project-data-pass.model";
+import {InboxComponent} from "../inbox/inbox.component";
 
 @Component({
   selector: 'app-home',
@@ -184,6 +185,15 @@ export class HomeComponent implements OnInit {
     this.dialog.open(DeleteUserDialogBoxComponent, {
       data: this.userId,
     });
+  }
+
+  openInbox(enterAnimationDuration: string,
+            exitAnimationDuration: string,) {
+    this.dialog.open(InboxComponent, {
+      width: '80%',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    })
   }
 
 }
