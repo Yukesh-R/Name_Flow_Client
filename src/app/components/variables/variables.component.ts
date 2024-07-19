@@ -11,12 +11,12 @@ import { CreateVariableDialogBoxComponent } from '../create-variable-dialog-box/
 import { UpdateVariableDialogBoxComponent } from '../update-variable-dialog-box/update-variable-dialog-box.component';
 import { DeleteVariableDialogBoxComponent } from '../delete-variable-dialog-box/delete-variable-dialog-box.component';
 import { CreateVariableManualDialogBoxComponent } from '../create-variable-manual-dialog-box/create-variable-manual-dialog-box.component';
-import { NgForOf } from '@angular/common';
+import {NgForOf, NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-variables',
   standalone: true,
-  imports: [NgForOf],
+  imports: [NgForOf, NgIf],
   templateUrl: './variables.component.html',
   styleUrl: './variables.component.css',
 })
@@ -27,13 +27,19 @@ export class VariablesComponent implements OnInit {
     private store: Store<AppState>,
   ) {}
   allVariables: GetVariableResponseModel[] = [];
-  userId!: number;
-  projectId!: number;
+  userId! : number;
+  projectId! : number;
+  projectName! : string;
+  projectDescription! : string;
   readonly dialog = inject(MatDialog);
+
+  showVariableCreateOption! : boolean ;
 
   ngOnInit(): void {
     this.router.queryParams.subscribe((params: any) => {
-      this.projectId = params.data;
+      this.projectId = params.projectId;
+      this.projectName = params.projectName;
+      this.projectDescription = params.projectDescription;
     });
 
     this.store.select(userDetailsSelector).subscribe((data) => {
@@ -117,4 +123,9 @@ export class VariablesComponent implements OnInit {
       },
     });
   }
+
+  onVariableCreateOption() {
+    this.showVariableCreateOption=!this.showVariableCreateOption;
+  }
+
 }
