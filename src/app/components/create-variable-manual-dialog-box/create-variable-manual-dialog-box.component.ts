@@ -1,5 +1,5 @@
 import { Component, OnInit, inject, model } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogClose, MatDialogRef} from '@angular/material/dialog';
 import { VariablesComponent } from '../variables/variables.component';
 import { GetVariableRequestModel } from '../../models/get-variable-request-model.Model';
 import {
@@ -16,7 +16,7 @@ import { CommonModule, NgIf } from '@angular/common';
 @Component({
   selector: 'app-create-variable-manual-dialog-box',
   standalone: true,
-  imports: [ReactiveFormsModule, NgIf],
+    imports: [ReactiveFormsModule, NgIf, MatDialogClose],
   templateUrl: './create-variable-manual-dialog-box.component.html',
   styleUrl: './create-variable-manual-dialog-box.component.css',
 })

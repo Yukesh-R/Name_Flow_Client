@@ -92,7 +92,8 @@ export class HomeComponent implements OnInit {
     exitAnimationDuration: string,
   ) {
     this.dialog.open(CreateProjectDialogBoxComponent, {
-      width: '500px',
+      width: '80%',
+      height : '90%',
       enterAnimationDuration,
       exitAnimationDuration,
     });
@@ -105,7 +106,6 @@ export class HomeComponent implements OnInit {
     exitAnimationDuration: string,
   ) {
     this.dialog.open(ProjectAccessDialogBoxComponent, {
-      width: '500px',
       data: this.myProjects[index].id,
       enterAnimationDuration,
       exitAnimationDuration,
@@ -179,6 +179,7 @@ export class HomeComponent implements OnInit {
   onUpdateProject() {
     this.dialog.open(UpdateProjectDialogBoxComponent, {
       width: '80%',
+      height : '90%',
       data: this.myProjects[this.clickedIndex as number],
     });
   }
@@ -186,6 +187,7 @@ export class HomeComponent implements OnInit {
   onUpdateUser() {
     this.dialog.open(UpdateUserDialogBoxComponent, {
       width: '80%',
+      height : '90%',
     });
   }
 
@@ -199,6 +201,7 @@ export class HomeComponent implements OnInit {
             exitAnimationDuration: string,) {
     this.dialog.open(InboxComponent, {
       width: '80%',
+      height : '90%',
       enterAnimationDuration,
       exitAnimationDuration,
     })

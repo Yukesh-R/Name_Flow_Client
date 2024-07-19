@@ -1,12 +1,14 @@
 import { Component, inject, model } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogClose, MatDialogRef} from '@angular/material/dialog';
 import { HomeComponent } from '../home/home.component';
 import { UserService } from '../../services/userServices/user-services.service';
 
 @Component({
   selector: 'app-delete-user-dialog-box',
   standalone: true,
-  imports: [],
+    imports: [
+        MatDialogClose
+    ],
   templateUrl: './delete-user-dialog-box.component.html',
   styleUrl: './delete-user-dialog-box.component.css',
 })
