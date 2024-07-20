@@ -110,9 +110,24 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  viewProject(index : number) {
+  viewMyProjectVariables(index : number) {
 
     let selectedProject : ProjectDataModel = this.myProjects[index];
+
+    let projectPass : ProjectDataPassModel = {
+      projectId : selectedProject.id,
+      projectName : selectedProject.projectName,
+      projectDescription : selectedProject.projectDescription
+    }
+    this.toastService.info("variables of Selected project","INFO");
+    this.route.navigate(['/all-variables'], {
+      queryParams: projectPass,
+    });
+  }
+
+  viewAccessProjectVariables(index : number) {
+
+    let selectedProject : ProjectDataModel = this.accessProjects[index];
 
     let projectPass : ProjectDataPassModel = {
       projectId : selectedProject.id,
