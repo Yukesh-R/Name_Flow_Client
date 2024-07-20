@@ -20,12 +20,12 @@ import {
   default as localForage,
 } from 'ngrx-store-persist';
 import {stateResetAction} from "../../store/action/state-reset.action";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [NgFor, RouterLink, NgIf, NgClass],
-
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
@@ -48,6 +48,7 @@ export class HomeComponent implements OnInit {
     private store: Store<AppState>,
     private dialog: MatDialog,
     private route: Router,
+    private toastService : ToastrService
   ) {}
 
   userName: string = '';
@@ -67,6 +68,7 @@ export class HomeComponent implements OnInit {
         this.myProjects = projectData;
       },
       error: (errorResponse: Error) => {
+        this.toastService.error("Projects Refresh Failed","ERROR");
       },
     });
     this.projectService.getAccessProject(userIdFromState).subscribe({
@@ -74,6 +76,7 @@ export class HomeComponent implements OnInit {
         this.accessProjects = projectData;
       },
       error: (errorResponse: Error) => {
+        this.toastService.error("Projects Refresh Failed","ERROR");
       },
     });
   }
@@ -116,6 +119,7 @@ export class HomeComponent implements OnInit {
       projectName : selectedProject.projectName,
       projectDescription : selectedProject.projectDescription
     }
+    this.toastService.info("variables of Selected project","INFO");
     this.route.navigate(['/all-variables'], {
       queryParams: projectPass,
     });
@@ -124,6 +128,7 @@ export class HomeComponent implements OnInit {
   onLogout() {
     localForage.clear();
     this.store.dispatch(stateResetAction());
+    this.toastService.success("Log Out Successfully","SUCCESS");
     this.route.navigate(['/']);
   }
 
@@ -175,6 +180,7 @@ export class HomeComponent implements OnInit {
       height : '90%',
       data: this.myProjects[this.clickedIndex as number],
     });
+    this.getProjectsRefresh();
   }
 
   onUpdateUser() {

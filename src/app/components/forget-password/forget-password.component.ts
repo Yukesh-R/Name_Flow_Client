@@ -8,6 +8,7 @@ import {
 import { UserService } from '../../services/userServices/user-services.service';
 import { VerifyResetPasswordModel } from '../../models/verify-resetpassword.model';
 import { NgIf } from '@angular/common';
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-forget-password',
@@ -19,6 +20,7 @@ import { NgIf } from '@angular/common';
 export class ForgetPasswordComponent {
   constructor(
     private userService: UserService,
+    private toastService : ToastrService
   ) {}
 
   isSubmittedEmailForm: boolean = false;
@@ -55,12 +57,15 @@ export class ForgetPasswordComponent {
         .subscribe({
           next: (response) => {
             if (response.status) {
+              this.toastService.success(response.message,"SUCCESS");
               this.toggleShowResetPasswordForm(true);
             } else {
+              this.toastService.warning(response.message,"WARNING");
               this.toggleShowResetPasswordForm(false);
             }
           },
           error: (errorResponse) => {
+            this.toastService.error("Email Validation Failed","ERROR");
           },
         });
     }
@@ -78,10 +83,13 @@ export class ForgetPasswordComponent {
       this.userService.verifyAndResetPassword(resetPassword).subscribe({
         next: (response) => {
           if (response.status) {
+            this.toastService.success(response.message,"SUCCESS");
           } else {
+            this.toastService.warning(response.message,"WARNING");
           }
         },
         error: (errorResponse) => {
+          this.toastService.error("Reset Password Failed","ERROR");
         },
       });
     }

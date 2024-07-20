@@ -4,7 +4,8 @@ import {Store} from "@ngrx/store";
 import {AppState} from "../store/state/app.state";
 import {userDetailsSelector} from "../store/selector/user-details.selector";
 
-export const authguardGuard: CanActivateFn = (route, state) => {
+export const authguardGuard: CanActivateFn =
+  (route, state) => {
   const store = inject(Store<AppState>);
   const router = inject(Router);
 

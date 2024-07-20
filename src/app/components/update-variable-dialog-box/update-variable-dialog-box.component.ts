@@ -11,6 +11,7 @@ import {
 import { VariableNameService } from '../../services/variableName/variable-name.service';
 import { ResponseModel } from '../../models/response.model';
 import { NgIf } from '@angular/common';
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-update-variable-dialog-box',
@@ -28,7 +29,10 @@ export class UpdateVariableDialogBoxComponent implements OnInit {
   variableId!: number;
   isSubmittedUpdateForm: boolean = false;
 
-  constructor(private variableNameService: VariableNameService) {}
+  constructor(
+    private variableNameService: VariableNameService,
+    private toastService : ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.userId = this.data.userId;
@@ -63,9 +67,15 @@ export class UpdateVariableDialogBoxComponent implements OnInit {
     };
 
     this.variableNameService.updateVariable(updateVariableModel).subscribe({
-      next: (data: ResponseModel) => {
+      next: (response: ResponseModel) => {
+        if(response.status){
+          this.toastService.success(response.message,"SUCCESS");
+        }else{
+          this.toastService.warning(response.message,"WARNING");
+        }
       },
       error: (error: Error) => {
+        this.toastService.error("Variable Update Failed","ERROR");
       },
     });
   }

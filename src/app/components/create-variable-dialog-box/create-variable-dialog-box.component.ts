@@ -13,6 +13,7 @@ import { CreateVariableRequestModel } from '../../models/create-variable-request
 import { VariableNameService } from '../../services/variableName/variable-name.service';
 import { ResponseModel } from '../../models/response.model';
 import { CommonModule, NgIf } from '@angular/common';
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-create-variable-dialog-box',
@@ -30,7 +31,10 @@ export class CreateVariableDialogBoxComponent implements OnInit {
 
   isOtherDataTypeSelected: boolean = false;
   isOtherVarTypeSelected: boolean = false;
-  constructor(private variableNameService: VariableNameService) {}
+  constructor(
+    private variableNameService: VariableNameService,
+    private toastService : ToastrService
+  ) {}
 
   ngOnInit(): void {
     (this.userId = this.data.userId), (this.projectId = this.data.projectId);
@@ -71,8 +75,14 @@ export class CreateVariableDialogBoxComponent implements OnInit {
 
     this.variableNameService.createVariableAI(createVariableAIModel).subscribe({
       next: (response: ResponseModel) => {
+        if(response.status){
+          this.toastService.success(response.message,"SUCCESS");
+        }else{
+          this.toastService.warning(response.message,"WARNING");
+        }
       },
       error: (error: Error) => {
+        this.toastService.error("AI Variable Creation Failed","ERROR");
       },
     });
   }

@@ -9,6 +9,8 @@ import { UserService } from '../../services/userServices/user-services.service';
 import { RegistrationRequestModel } from '../../models/registration-request.model';
 import { NgIf } from '@angular/common';
 import {Router, RouterLink} from '@angular/router';
+import {ToastrService} from "ngx-toastr";
+import {response} from "express";
 
 @Component({
   selector: 'app-registration',
@@ -22,6 +24,7 @@ export class RegistrationComponent {
   constructor(
     private userService: UserService,
     private router: Router,
+    private toastService : ToastrService
   ) {}
 
   isSubmittedEmailForm: boolean = false;
@@ -64,12 +67,15 @@ export class RegistrationComponent {
         .subscribe({
           next: (response) => {
             if (response.status) {
+              this.toastService.success(response.message,"SUCCESS");
               this.toggleShowRegistrationForm(true);
             } else {
+              this.toastService.warning(response.message,"WARNING");
               this.toggleShowRegistrationForm(false);
             }
           },
           error: (errorResponse) => {
+            this.toastService.error("Email Validation Failed","ERROR");
           },
         });
     }
@@ -93,11 +99,14 @@ export class RegistrationComponent {
       this.userService.verifyActivationCode(registrationRequest).subscribe({
         next: (response) => {
           if (response.status) {
+            this.toastService.success(response.message,"SUCCESS");
             this.router.navigate(['/']);
           } else {
+            this.toastService.warning(response.message,"WARNING");
           }
         },
         error: (errorResponse) => {
+          this.toastService.error("Registration Failed","ERROR");
         },
       });
     }

@@ -12,6 +12,7 @@ import { VariableNameService } from '../../services/variableName/variable-name.s
 import { CreateVariableManualRequestModel } from '../../models/create-variable-manual-request-model.model';
 import { ResponseModel } from '../../models/response.model';
 import { CommonModule, NgIf } from '@angular/common';
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-create-variable-manual-dialog-box',
@@ -30,7 +31,10 @@ export class CreateVariableManualDialogBoxComponent implements OnInit {
   isOtherDataTypeSelected: boolean = false;
   isOtherVarTypeSelected: boolean = false;
 
-  constructor(private variableNameService: VariableNameService) {}
+  constructor(
+    private variableNameService: VariableNameService,
+    private toastService : ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.userId = this.data.userId;
@@ -76,8 +80,14 @@ export class CreateVariableManualDialogBoxComponent implements OnInit {
       .createVariableManual(createVariableManualModel)
       .subscribe({
         next: (response: ResponseModel) => {
+          if(response.status){
+            this.toastService.success(response.message,"SUCCESS");
+          }else{
+            this.toastService.warning(response.message,"WARNING");
+          }
         },
         error: (error: Error) => {
+          this.toastService.error("Manual Variable Creation Failed","ERROR");
         },
       });
   }

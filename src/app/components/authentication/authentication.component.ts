@@ -11,6 +11,7 @@ import { AuthenticationRequestModel } from '../../models/authentication-request.
 import { authenticationAction } from '../../store/action/authentication.action';
 import { RouterLink } from '@angular/router';
 import { NgIf } from '@angular/common';
+import {stateResetAction} from "../../store/action/state-reset.action";
 
 @Component({
   selector: 'app-authentication',
@@ -22,8 +23,12 @@ import { NgIf } from '@angular/common';
   templateUrl: './authentication.component.html',
   styleUrl: './authentication.component.css',
 })
-export class AuthenticationComponent {
+export class AuthenticationComponent implements OnInit{
   constructor(private store: Store<AppState>) {}
+
+  ngOnInit(): void {
+    this.store.dispatch(stateResetAction());
+  }
 
   isSubmitted: boolean = false;
 
