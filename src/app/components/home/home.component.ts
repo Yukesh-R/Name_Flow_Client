@@ -22,6 +22,7 @@ import {
 import {stateResetAction} from "../../store/action/state-reset.action";
 import {ToastrService} from "ngx-toastr";
 
+
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -97,6 +98,7 @@ export class HomeComponent implements OnInit {
     index: number) {
     this.dialog.open(ProjectAccessDialogBoxComponent, {
       data: this.myProjects[index].id,
+
     });
   }
 
@@ -127,6 +129,7 @@ export class HomeComponent implements OnInit {
     this.toastService.info("variables of Selected project","INFO");
     this.route.navigate(['/all-variables'], {
       queryParams: projectPass,
+
     });
   }
 
@@ -182,7 +185,7 @@ export class HomeComponent implements OnInit {
   onUpdateProject() {
     this.dialog.open(UpdateProjectDialogBoxComponent, {
       width: '80%',
-      height : '90%',
+      height: '90%',
       data: this.myProjects[this.clickedIndex as number],
     });
     this.getProjectsRefresh();
@@ -191,7 +194,7 @@ export class HomeComponent implements OnInit {
   onUpdateUser() {
     this.dialog.open(UpdateUserDialogBoxComponent, {
       width: '80%',
-      height : '90%',
+      height: '90%',
     });
   }
 
@@ -200,6 +203,7 @@ export class HomeComponent implements OnInit {
       data: this.userId,
     });
   }
+
 
   openInbox() {
     this.dialog.open(InboxComponent, {

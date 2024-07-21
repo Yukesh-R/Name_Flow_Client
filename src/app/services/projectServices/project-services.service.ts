@@ -9,6 +9,7 @@ import { ProjectDataModel } from '../../models/project-data.model';
 import { AccessProviderModel } from '../../models/access-provider.model';
 import { AccessAcceptModel } from '../../models/access-accept.model';
 import { UpdateProjectModel } from '../../models/update-project-model.model';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,7 @@ import { UpdateProjectModel } from '../../models/update-project-model.model';
 export class ProjectService {
   constructor(private httpClient: HttpClient) {}
 
-  private baseUrl: string = 'http://localhost:8080/name-flow';
+  private baseUrl: string = environment.baseURL;
 
   public createProject(
     newProjectRequest: ProjectCreateRequestModel,
