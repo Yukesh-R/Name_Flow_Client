@@ -12,6 +12,7 @@ import { UpdateVariableDialogBoxComponent } from '../update-variable-dialog-box/
 import { DeleteVariableDialogBoxComponent } from '../delete-variable-dialog-box/delete-variable-dialog-box.component';
 import { CreateVariableManualDialogBoxComponent } from '../create-variable-manual-dialog-box/create-variable-manual-dialog-box.component';
 import {NgForOf, NgIf} from '@angular/common';
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-variables',
@@ -25,6 +26,7 @@ export class VariablesComponent implements OnInit {
     private variableService: VariableNameService,
     private router: ActivatedRoute,
     private store: Store<AppState>,
+    private toastService : ToastrService
   ) {}
   allVariables: GetVariableResponseModel[] = [];
   userId! : number;
@@ -41,7 +43,11 @@ export class VariablesComponent implements OnInit {
       this.projectName = params.projectName;
       this.projectDescription = params.projectDescription;
     });
+    this.getVariableRefresh();
 
+  }
+
+  getVariableRefresh() {
     this.store.select(userDetailsSelector).subscribe((data) => {
       this.userId = data.userId;
     });
@@ -56,7 +62,7 @@ export class VariablesComponent implements OnInit {
         this.allVariables = data;
       },
       error: (error: Error) => {
-        console.log(error);
+        this.toastService.error("Variables Refresh Failed","ERROR");
       },
     });
   }
@@ -70,6 +76,7 @@ export class VariablesComponent implements OnInit {
       width: '80%',
       height : '90%',
     });
+    this.getVariableRefresh();
   }
 
   createVariableManual() {
@@ -81,6 +88,7 @@ export class VariablesComponent implements OnInit {
         projectId: this.projectId,
       },
     });
+    this.getVariableRefresh();
   }
 
   updateVariable(index: number) {
@@ -98,6 +106,7 @@ export class VariablesComponent implements OnInit {
       height : '90%',
       width: '80%',
     });
+    this.getVariableRefresh();
   }
 
   deleteVariable(index: number) {
@@ -108,6 +117,7 @@ export class VariablesComponent implements OnInit {
         variableId: this.allVariables[index].id,
       },
     });
+    this.getVariableRefresh();
   }
 
   onVariableCreateOption() {

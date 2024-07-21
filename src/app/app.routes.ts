@@ -4,14 +4,26 @@ import { AuthenticationComponent } from './components/authentication/authenticat
 import { RegistrationComponent } from './components/registration/registration.component';
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 import { HomeComponent } from './components/home/home.component';
-import { InboxComponent } from './components/inbox/inbox.component';
 import { authguardGuard } from './authguards/authguard.guard';
 
 export const routes: Routes = [
-  {path : '',component : AuthenticationComponent},
-  {path : 'register',component : RegistrationComponent},
-  {path : 'forget-password',component : ForgetPasswordComponent},
-  {path : 'home',component:HomeComponent},
+  {
+    path : '',
+    component : AuthenticationComponent
+  },
+  {
+    path : 'register',
+    component : RegistrationComponent
+  },
+  {
+    path : 'forget-password',
+    component : ForgetPasswordComponent
+  },
+  {
+    path : 'home',
+    component:HomeComponent,
+    canActivate: [authguardGuard]
+  },
   {
     path: 'all-variables',
     component: VariablesComponent,

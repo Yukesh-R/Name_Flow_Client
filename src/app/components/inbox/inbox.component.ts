@@ -9,6 +9,7 @@ import {NgForOf} from "@angular/common";
 import {AccessAcceptModel} from "../../models/access-accept.model";
 import {ResponseModel} from "../../models/response.model";
 import {MatDialogClose} from "@angular/material/dialog";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-inbox',
@@ -28,6 +29,7 @@ export class InboxComponent implements OnInit{
   constructor(
     private store : Store<AppState>,
     private projectService: ProjectService,
+    private toastService : ToastrService
   ) {
   }
 
@@ -45,10 +47,9 @@ export class InboxComponent implements OnInit{
       .subscribe({
         next: (accessProviders : AccessProviderModel[]) => {
           this.accessProvidersList=accessProviders;
-          console.log("Access : ",this.accessProvidersList);
         },
         error: (err : Error) => {
-          console.log(err);
+          this.toastService.error("Get Access Providers Failed","ERROR");
         }
       })
   }
@@ -66,22 +67,19 @@ export class InboxComponent implements OnInit{
       accessProjectId : accessProvider.accessProjectId,
     }
 
-    console.log("paylode : ",accessAccept);
-
     this.projectService.relationAccessAcceptance(accessAccept)
       .subscribe({
         next: (response : ResponseModel) => {
-          if(response.status){
-            console.log("Access Accepted Successfull");
-          }else{
-            console.log(response.message);
+          if (response.status) {
+            this.toastService.success(response.message,"SUCCESS");
+          } else {
+            this.toastService.warning(response.message,"WARNING");
           }
         },
         error: (errorResponse : Error) => {
-          console.log(errorResponse);
+          this.toastService.error("Access Acceptance Failed","ERROR");
         }
       })
-
   }
 
 }

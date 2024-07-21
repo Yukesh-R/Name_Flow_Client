@@ -66,16 +66,11 @@ export class UpdateUserDialogBoxComponent implements OnInit {
     if (this.userUpdateForm.valid) {
       this.userService.updateUser(userUpdateModel).subscribe({
         next: (response: ResponseModel) => {
-          console.log(response.message);
         },
         error: (error: Error) => {
-          console.log(error);
         },
       });
     }
   }
 
-  onClose() {
-    this.dialogRef.close();
-  }
 }
