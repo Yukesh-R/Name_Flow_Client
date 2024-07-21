@@ -6,12 +6,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { UserService } from '../../services/userServices/user-services.service';
-import { Store } from '@ngrx/store';
-import { AppState } from '../../store/state/app.state';
-import { userDetailsSelector } from '../../store/selector/user-details.selector';
-import { UserDetailsModel } from '../../models/user-details.model';
 import { VerifyResetPasswordModel } from '../../models/verify-resetpassword.model';
 import { NgIf } from '@angular/common';
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-forget-password',
@@ -23,7 +20,7 @@ import { NgIf } from '@angular/common';
 export class ForgetPasswordComponent {
   constructor(
     private userService: UserService,
-    private store: Store<AppState>,
+    private toastService : ToastrService
   ) {}
 
   isSubmittedEmailForm: boolean = false;
@@ -54,22 +51,21 @@ export class ForgetPasswordComponent {
   onEmailFormSubmit() {
     this.emailForm.markAsTouched();
     this.isSubmittedEmailForm = true;
-    console.log(this.emailForm.value.email!);
     if (this.emailForm.valid) {
       this.userService
         .forgetPasswordMailSend(this.emailForm.value.email!)
         .subscribe({
           next: (response) => {
             if (response.status) {
+              this.toastService.success(response.message,"SUCCESS");
               this.toggleShowResetPasswordForm(true);
-              console.log(response);
             } else {
+              this.toastService.warning(response.message,"WARNING");
               this.toggleShowResetPasswordForm(false);
-              console.log(response.message);
             }
           },
           error: (errorResponse) => {
-            console.log(errorResponse);
+            this.toastService.error("Email Validation Failed","ERROR");
           },
         });
     }
@@ -84,17 +80,16 @@ export class ForgetPasswordComponent {
         activationCode: this.resetPasswordForm.value.activationCode!,
         newPassword: this.resetPasswordForm.value.newPassword!,
       };
-      console.log(resetPassword);
       this.userService.verifyAndResetPassword(resetPassword).subscribe({
         next: (response) => {
           if (response.status) {
-            console.log(response);
+            this.toastService.success(response.message,"SUCCESS");
           } else {
-            console.log(response.message);
+            this.toastService.warning(response.message,"WARNING");
           }
         },
         error: (errorResponse) => {
-          console.log(errorResponse);
+          this.toastService.error("Reset Password Failed","ERROR");
         },
       });
     }

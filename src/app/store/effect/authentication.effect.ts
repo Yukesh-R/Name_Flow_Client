@@ -8,13 +8,16 @@ import {
 } from '../action/authentication.action';
 import { catchError, map, mergeMap, of } from 'rxjs';
 import { Router } from '@angular/router';
+import {ToastrService} from "ngx-toastr";
 
 @Injectable()
+
 export class AuthenticationEffect {
   constructor(
     private actions$: Actions,
     private userService: UserService,
     private router: Router,
+    private toastService: ToastrService,
   ) {}
 
   authenticationEffect$ = createEffect(() =>
@@ -23,12 +26,8 @@ export class AuthenticationEffect {
       mergeMap((action) =>
         this.userService.authenticate(action.authRequest).pipe(
           map((authenticationResponseDTO) => {
-            console.log(authenticationResponseDTO);
             if (authenticationResponseDTO != null) {
-              localStorage.setItem(
-                'jwtToken',
-                authenticationResponseDTO.jwtToken,
-              );
+              this.toastService.success("Authenticated successfully","SUCCESS");
               this.router.navigate(['/home']).then((status) => true);
               return authenticationSuccessAction({
                 userId: authenticationResponseDTO.userId,
@@ -42,12 +41,14 @@ export class AuthenticationEffect {
                 jwtToken: authenticationResponseDTO.jwtToken,
               });
             } else {
+              this.toastService.error("Authentication Failed","ERROR");
               return authenticationFailAction({
                 errorMessage: 'Authentication Failed',
               });
             }
           }),
           catchError((errorResponse) => {
+            this.toastService.error("User Credentials Not Found","ERROR");
             return of(
               authenticationFailAction({ errorMessage: errorResponse.message }),
             );

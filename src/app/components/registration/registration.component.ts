@@ -8,7 +8,9 @@ import {
 import { UserService } from '../../services/userServices/user-services.service';
 import { RegistrationRequestModel } from '../../models/registration-request.model';
 import { NgIf } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
+import {ToastrService} from "ngx-toastr";
+import {response} from "express";
 
 @Component({
   selector: 'app-registration',
@@ -19,7 +21,11 @@ import { RouterLink } from '@angular/router';
   styleUrl: './registration.component.css',
 })
 export class RegistrationComponent {
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private toastService : ToastrService
+  ) {}
 
   isSubmittedEmailForm: boolean = false;
   isSubmittedRegistrationForm: boolean = false;
@@ -61,15 +67,15 @@ export class RegistrationComponent {
         .subscribe({
           next: (response) => {
             if (response.status) {
+              this.toastService.success(response.message,"SUCCESS");
               this.toggleShowRegistrationForm(true);
-              console.log(response);
             } else {
+              this.toastService.warning(response.message,"WARNING");
               this.toggleShowRegistrationForm(false);
-              console.log(response.message);
             }
           },
           error: (errorResponse) => {
-            console.log(errorResponse);
+            this.toastService.error("Email Validation Failed","ERROR");
           },
         });
     }
@@ -93,13 +99,14 @@ export class RegistrationComponent {
       this.userService.verifyActivationCode(registrationRequest).subscribe({
         next: (response) => {
           if (response.status) {
-            console.log(response);
+            this.toastService.success(response.message,"SUCCESS");
+            this.router.navigate(['/']);
           } else {
-            console.log(response.message);
+            this.toastService.warning(response.message,"WARNING");
           }
         },
         error: (errorResponse) => {
-          console.log(errorResponse);
+          this.toastService.error("Registration Failed","ERROR");
         },
       });
     }

@@ -12,6 +12,7 @@ import { ProjectService } from '../../services/projectServices/project-services.
 import { ResponseModel } from '../../models/response-model.model';
 import { ProjectDataModel } from '../../models/project-data.model';
 import { NgIf } from '@angular/common';
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-update-project-dialog-box',
@@ -21,11 +22,15 @@ import { NgIf } from '@angular/common';
   styleUrl: './update-project-dialog-box.component.css',
 })
 export class UpdateProjectDialogBoxComponent implements OnInit {
+
   readonly dialogRef = inject(MatDialogRef<HomeComponent>);
   readonly data = inject<ProjectDataModel>(MAT_DIALOG_DATA);
   readonly projectDetails = model(this.data);
-  isSubmittedUpdateForm: boolean = false;
-  constructor(private projectService: ProjectService) {}
+
+  constructor(
+    private projectService: ProjectService,
+    private toastService: ToastrService,
+  ) {}
 
   userId!: number;
   projectId!: number;
@@ -61,16 +66,17 @@ export class UpdateProjectDialogBoxComponent implements OnInit {
     if (this.updateProjectForm.valid) {
       this.projectService.updateProject(updateProjectModel).subscribe({
         next: (response: ResponseModel) => {
-          console.log(response.message);
+          if(response.status){
+            this.toastService.success(response.message,"SUCCESS");
+          }else{
+            this.toastService.warning(response.message,"WARNING");
+          }
         },
         error: (error: Error) => {
-          console.log(error);
+          this.toastService.error("Project Update Failed","ERROR");
         },
       });
     }
   }
 
-  onClose() {
-    this.dialogRef.close();
-  }
 }

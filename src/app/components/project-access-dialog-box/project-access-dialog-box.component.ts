@@ -14,6 +14,7 @@ import { CreateRelationshipModel } from '../../models/create-relationship.model'
 import { ProjectService } from '../../services/projectServices/project-services.service';
 import { ResponseModel } from '../../models/response.model';
 import { NgIf } from '@angular/common';
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-project-access-dialog-box',
@@ -26,6 +27,7 @@ export class ProjectAccessDialogBoxComponent {
   constructor(
     private store: Store<AppState>,
     private projectService: ProjectService,
+    private toastService : ToastrService
   ) {}
 
   projectIdToGiveAccess: number = inject<number>(MAT_DIALOG_DATA);
@@ -57,13 +59,13 @@ export class ProjectAccessDialogBoxComponent {
     this.projectService.createRelationship(newAccess).subscribe({
       next: (response: ResponseModel) => {
         if (response.status) {
-          console.log(response);
+          this.toastService.success(response.message,"SUCCESS");
         } else {
-          console.log(response.message);
+          this.toastService.warning(response.message,"WARNING");
         }
       },
       error: (errorResponse) => {
-        console.log(errorResponse);
+        this.toastService.error("Access Creation Failed","ERROR");
       },
     });
   }

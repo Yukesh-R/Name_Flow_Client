@@ -14,6 +14,7 @@ import { CreateProjectRequestModel } from '../../models/create-project-request.m
 import { ResponseModel } from '../../models/response.model';
 import { MatDialogClose } from '@angular/material/dialog';
 import { NgIf } from '@angular/common';
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-create-project-dialog-box',
@@ -22,10 +23,12 @@ import { NgIf } from '@angular/common';
   templateUrl: './create-project-dialog-box.component.html',
   styleUrl: './create-project-dialog-box.component.css',
 })
+
 export class CreateProjectDialogBoxComponent {
   constructor(
     private projectService: ProjectService,
     private store: Store<AppState>,
+    private toastService : ToastrService
   ) {}
 
   isSubmittedCreateProjectForm: boolean = false;
@@ -58,13 +61,13 @@ export class CreateProjectDialogBoxComponent {
       this.projectService.createProject(newProject).subscribe({
         next: (response: ResponseModel) => {
           if (response.status) {
-            console.log(response);
+            this.toastService.success(response.message,"SUCCESS");
           } else {
-            console.log(response.message);
+            this.toastService.warning(response.message,"WARNING");
           }
         },
         error: (errorResponse: Error) => {
-          console.log(errorResponse);
+          this.toastService.error("Project Creation Failed","ERROR");
         },
       });
     }

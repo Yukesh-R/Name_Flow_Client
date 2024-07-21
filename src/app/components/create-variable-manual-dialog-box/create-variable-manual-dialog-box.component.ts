@@ -12,6 +12,7 @@ import { VariableNameService } from '../../services/variableName/variable-name.s
 import { CreateVariableManualRequestModel } from '../../models/create-variable-manual-request-model.model';
 import { ResponseModel } from '../../models/response.model';
 import { CommonModule, NgIf } from '@angular/common';
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-create-variable-manual-dialog-box',
@@ -30,7 +31,10 @@ export class CreateVariableManualDialogBoxComponent implements OnInit {
   isOtherDataTypeSelected: boolean = false;
   isOtherVarTypeSelected: boolean = false;
 
-  constructor(private variableNameService: VariableNameService) {}
+  constructor(
+    private variableNameService: VariableNameService,
+    private toastService : ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.userId = this.data.userId;
@@ -76,31 +80,23 @@ export class CreateVariableManualDialogBoxComponent implements OnInit {
       .createVariableManual(createVariableManualModel)
       .subscribe({
         next: (response: ResponseModel) => {
-          console.log(response);
+          if(response.status){
+            this.toastService.success(response.message,"SUCCESS");
+          }else{
+            this.toastService.warning(response.message,"WARNING");
+          }
         },
         error: (error: Error) => {
-          console.log(error);
+          this.toastService.error("Manual Variable Creation Failed","ERROR");
         },
       });
   }
 
-  closeDialog() {
-    this.dialogRef.close();
-  }
-
   isOtherDataTypeSelectedCheck() {
-    if (this.createVariableManualForm.value.dataType == 'others') {
-      this.isOtherDataTypeSelected = true;
-    } else {
-      this.isOtherDataTypeSelected = false;
-    }
+    this.isOtherDataTypeSelected = this.createVariableManualForm.value.dataType == 'others';
   }
 
   isOtherVarTypeSelectedCheck() {
-    if (this.createVariableManualForm.value.variableType == 'others') {
-      this.isOtherVarTypeSelected = true;
-    } else {
-      this.isOtherVarTypeSelected = false;
-    }
+    this.isOtherVarTypeSelected = this.createVariableManualForm.value.variableType == 'others';
   }
 }

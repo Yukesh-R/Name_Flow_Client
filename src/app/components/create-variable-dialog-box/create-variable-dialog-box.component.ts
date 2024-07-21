@@ -13,6 +13,7 @@ import { CreateVariableRequestModel } from '../../models/create-variable-request
 import { VariableNameService } from '../../services/variableName/variable-name.service';
 import { ResponseModel } from '../../models/response.model';
 import { CommonModule, NgIf } from '@angular/common';
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-create-variable-dialog-box',
@@ -30,7 +31,10 @@ export class CreateVariableDialogBoxComponent implements OnInit {
 
   isOtherDataTypeSelected: boolean = false;
   isOtherVarTypeSelected: boolean = false;
-  constructor(private variableNameService: VariableNameService) {}
+  constructor(
+    private variableNameService: VariableNameService,
+    private toastService : ToastrService
+  ) {}
 
   ngOnInit(): void {
     (this.userId = this.data.userId), (this.projectId = this.data.projectId);
@@ -71,31 +75,23 @@ export class CreateVariableDialogBoxComponent implements OnInit {
 
     this.variableNameService.createVariableAI(createVariableAIModel).subscribe({
       next: (response: ResponseModel) => {
-        console.log(response.message);
+        if(response.status){
+          this.toastService.success(response.message,"SUCCESS");
+        }else{
+          this.toastService.warning(response.message,"WARNING");
+        }
       },
       error: (error: Error) => {
-        console.log(error);
+        this.toastService.error("AI Variable Creation Failed","ERROR");
       },
     });
   }
 
-  closeDialog() {
-    this.dialogRef.close();
-  }
-
   isOtherVarTypeCheck() {
-    if (this.createVariableAIForm.value.variableType == 'others') {
-      this.isOtherVarTypeSelected = true;
-    } else {
-      this.isOtherVarTypeSelected = false;
-    }
+    this.isOtherVarTypeSelected = this.createVariableAIForm.value.variableType == 'others';
   }
 
   isOtherDataTypeCheck() {
-    if (this.createVariableAIForm.value.dataType == 'others') {
-      this.isOtherDataTypeSelected = true;
-    } else {
-      this.isOtherDataTypeSelected = false;
-    }
+    this.isOtherDataTypeSelected = this.createVariableAIForm.value.dataType == 'others';
   }
 }

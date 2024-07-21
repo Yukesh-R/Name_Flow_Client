@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectDataModel } from '../../models/project-data.model';
 import { ProjectService } from '../../services/projectServices/project-services.service';
-import { Store, StoreModule } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { AppState } from '../../store/state/app.state';
 import { userDetailsSelector } from '../../store/selector/user-details.selector';
 import { UserDetailsModel } from '../../models/user-details.model';
@@ -13,18 +13,19 @@ import { Router } from '@angular/router';
 import { RouterLink } from '@angular/router';
 import { UpdateProjectDialogBoxComponent } from '../update-project-dialog-box/update-project-dialog-box.component';
 import { DeleteUserDialogBoxComponent } from '../delete-user-dialog-box/delete-user-dialog-box.component';
-
 import { UpdateUserDialogBoxComponent } from '../update-user-dialog-box/update-user-dialog-box.component';
-
 import {ProjectDataPassModel} from "../../models/project-data-pass.model";
 import {InboxComponent} from "../inbox/inbox.component";
-
+import {
+  default as localForage,
+} from 'ngrx-store-persist';
+import {stateResetAction} from "../../store/action/state-reset.action";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [NgFor, RouterLink, NgIf, NgClass],
-
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
@@ -47,6 +48,7 @@ export class HomeComponent implements OnInit {
     private store: Store<AppState>,
     private dialog: MatDialog,
     private route: Router,
+    private toastService : ToastrService
   ) {}
 
   userName: string = '';
@@ -64,27 +66,23 @@ export class HomeComponent implements OnInit {
     this.projectService.getOwnProjects(userIdFromState).subscribe({
       next: (projectData: ProjectDataModel[]) => {
         this.myProjects = projectData;
-        console.log(this.myProjects);
       },
       error: (errorResponse: Error) => {
-        console.log(errorResponse);
+        this.toastService.error("Projects Refresh Failed","ERROR");
       },
     });
     this.projectService.getAccessProject(userIdFromState).subscribe({
       next: (projectData: ProjectDataModel[]) => {
         this.accessProjects = projectData;
-        console.log(this.accessProjects);
       },
       error: (errorResponse: Error) => {
-        console.log(errorResponse);
+        this.toastService.error("Projects Refresh Failed","ERROR");
       },
     });
   }
 
   ngOnInit() {
     this.getProjectsRefresh();
-    console.log(this.myProjects);
-    console.log(this.accessProjects);
   }
 
   onCreateNewProject(
@@ -112,7 +110,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  viewProject(index : number) {
+  viewMyProjectVariables(index : number) {
 
     let selectedProject : ProjectDataModel = this.myProjects[index];
 
@@ -121,15 +119,31 @@ export class HomeComponent implements OnInit {
       projectName : selectedProject.projectName,
       projectDescription : selectedProject.projectDescription
     }
+    this.toastService.info("variables of Selected project","INFO");
     this.route.navigate(['/all-variables'], {
-
       queryParams: projectPass,
+    });
+  }
 
+  viewAccessProjectVariables(index : number) {
+
+    let selectedProject : ProjectDataModel = this.accessProjects[index];
+
+    let projectPass : ProjectDataPassModel = {
+      projectId : selectedProject.id,
+      projectName : selectedProject.projectName,
+      projectDescription : selectedProject.projectDescription
+    }
+    this.toastService.info("variables of Selected project","INFO");
+    this.route.navigate(['/all-variables'], {
+      queryParams: projectPass,
     });
   }
 
   onLogout() {
-    localStorage.clear();
+    localForage.clear();
+    this.store.dispatch(stateResetAction());
+    this.toastService.success("Log Out Successfully","SUCCESS");
     this.route.navigate(['/']);
   }
 
@@ -160,7 +174,6 @@ export class HomeComponent implements OnInit {
     if (this.showProjectsMoreOption) {
       this.clickedIndex = index;
     }
-    console.log('i : ', this.clickedIndex);
   }
 
   activeButton: string = 'allProjects';
@@ -182,6 +195,7 @@ export class HomeComponent implements OnInit {
       height : '90%',
       data: this.myProjects[this.clickedIndex as number],
     });
+    this.getProjectsRefresh();
   }
 
   onUpdateUser() {
