@@ -29,6 +29,7 @@ export class AuthenticationEffect {
                 'jwtToken',
                 authenticationResponseDTO.jwtToken,
               );
+
               this.router.navigate(['/home']).then((status) => true);
               return authenticationSuccessAction({
                 userId: authenticationResponseDTO.userId,

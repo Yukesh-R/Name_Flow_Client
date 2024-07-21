@@ -16,9 +16,9 @@ import { DeleteUserDialogBoxComponent } from '../delete-user-dialog-box/delete-u
 
 import { UpdateUserDialogBoxComponent } from '../update-user-dialog-box/update-user-dialog-box.component';
 
-import {ProjectDataPassModel} from "../../models/project-data-pass.model";
-import {InboxComponent} from "../inbox/inbox.component";
-
+import { ProjectDataPassModel } from '../../models/project-data-pass.model';
+import { InboxComponent } from '../inbox/inbox.component';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-home',
@@ -93,7 +93,7 @@ export class HomeComponent implements OnInit {
   ) {
     this.dialog.open(CreateProjectDialogBoxComponent, {
       width: '80%',
-      height : '90%',
+      height: '90%',
       enterAnimationDuration,
       exitAnimationDuration,
     });
@@ -107,24 +107,20 @@ export class HomeComponent implements OnInit {
   ) {
     this.dialog.open(ProjectAccessDialogBoxComponent, {
       data: this.myProjects[index].id,
-      enterAnimationDuration,
-      exitAnimationDuration,
+      
     });
   }
 
-  viewProject(index : number) {
+  viewProject(index: number) {
+    let selectedProject: ProjectDataModel = this.myProjects[index];
 
-    let selectedProject : ProjectDataModel = this.myProjects[index];
-
-    let projectPass : ProjectDataPassModel = {
-      projectId : selectedProject.id,
-      projectName : selectedProject.projectName,
-      projectDescription : selectedProject.projectDescription
-    }
+    let projectPass: ProjectDataPassModel = {
+      projectId: selectedProject.id,
+      projectName: selectedProject.projectName,
+      projectDescription: selectedProject.projectDescription,
+    };
     this.route.navigate(['/all-variables'], {
-
       queryParams: projectPass,
-
     });
   }
 
@@ -179,7 +175,7 @@ export class HomeComponent implements OnInit {
   onUpdateProject() {
     this.dialog.open(UpdateProjectDialogBoxComponent, {
       width: '80%',
-      height : '90%',
+      height: '90%',
       data: this.myProjects[this.clickedIndex as number],
     });
   }
@@ -187,7 +183,7 @@ export class HomeComponent implements OnInit {
   onUpdateUser() {
     this.dialog.open(UpdateUserDialogBoxComponent, {
       width: '80%',
-      height : '90%',
+      height: '90%',
     });
   }
 
@@ -197,13 +193,12 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  openInbox(enterAnimationDuration: string,
-            exitAnimationDuration: string,) {
+  openInbox(enterAnimationDuration: string, exitAnimationDuration: string) {
     this.dialog.open(InboxComponent, {
       width: '80%',
-      height : '90%',
+      height: '90%',
       enterAnimationDuration,
       exitAnimationDuration,
-    })
+    });
   }
 }

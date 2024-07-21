@@ -7,6 +7,7 @@ import { AuthenticationRequestModel } from '../../models/authentication-request.
 import { VerifyResetPasswordModel } from '../../models/verify-resetpassword.model';
 import { AuthenticationResponseModel } from '../../models/authentication-response.model';
 import { UpdateUserModel } from '../../models/update-user-model.model';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,7 @@ import { UpdateUserModel } from '../../models/update-user-model.model';
 export class UserService {
   constructor(private httpClient: HttpClient) {}
 
-  private baseUrl: string = 'http://localhost:8080/name-flow';
+  private baseUrl: string = environment.baseURL;
 
   public registrationEmailValidation(email: string): Observable<ResponseModel> {
     return this.httpClient.get<ResponseModel>(

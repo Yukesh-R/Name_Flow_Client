@@ -4,7 +4,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:staging":"ng serve --configuration=staging",
     "build": "ng build",
+    "build:staging": "ng build --configuration=staging",
+    "build:development": "ng build --configuration=development",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:Name_Flow_Client": "node dist/name-flow-client/server/server.mjs"
@@ -27,6 +30,7 @@
     "@ngrx/store": "^17.2.0",
     "@ngrx/store-devtools": "^17.2.0",
     "express": "^4.18.2",
+    "primeng": "^17.18.5",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"

@@ -8,12 +8,13 @@ import { GetVariableRequestModel } from '../../models/get-variable-request-model
 import { GetVariableResponseModel } from '../../models/get-variable-response-model.Model';
 import { UpdateVariableModel } from '../../models/update-variable-model.model';
 import { DeleteVariableModel } from '../../models/delete-variable-model.model';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class VariableNameService {
-  private apiURL: string = 'http://localhost:8080/name-flow';
+  private apiURL: string = environment.baseURL;
   constructor(private httpClient: HttpClient) {}
 
   createVariableAI(
