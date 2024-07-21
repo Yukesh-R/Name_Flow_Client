@@ -85,28 +85,18 @@ export class HomeComponent implements OnInit {
     this.getProjectsRefresh();
   }
 
-  onCreateNewProject(
-    enterAnimationDuration: string,
-    exitAnimationDuration: string,
-  ) {
+  onCreateNewProject() {
     this.dialog.open(CreateProjectDialogBoxComponent, {
       width: '80%',
       height : '90%',
-      enterAnimationDuration,
-      exitAnimationDuration,
     });
     this.getProjectsRefresh();
   }
 
   onAccessProject(
-    index: number,
-    enterAnimationDuration: string,
-    exitAnimationDuration: string,
-  ) {
+    index: number) {
     this.dialog.open(ProjectAccessDialogBoxComponent, {
       data: this.myProjects[index].id,
-      enterAnimationDuration,
-      exitAnimationDuration,
     });
   }
 
@@ -211,13 +201,10 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  openInbox(enterAnimationDuration: string,
-            exitAnimationDuration: string,) {
+  openInbox() {
     this.dialog.open(InboxComponent, {
       width: '80%',
       height : '90%',
-      enterAnimationDuration,
-      exitAnimationDuration,
     })
   }
 }
