@@ -17,7 +17,7 @@ import { environment } from '../../../environments/environment';
 export class ProjectService {
   constructor(private httpClient: HttpClient) {}
 
-  private baseUrl: string = environment.baseURL;
+  private baseUrl: string = environment.baseURL+"/name-flow";
 
   public createProject(
     newProjectRequest: ProjectCreateRequestModel,
