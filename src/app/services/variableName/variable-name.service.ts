@@ -14,7 +14,7 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root',
 })
 export class VariableNameService {
-  private apiURL: string = environment.baseURL;
+  private apiURL: string = environment.baseURL+"/name-flow";
   constructor(private httpClient: HttpClient) {}
 
   createVariableAI(

@@ -15,7 +15,7 @@ import { environment } from '../../../environments/environment';
 export class UserService {
   constructor(private httpClient: HttpClient) {}
 
-  private baseUrl: string = environment.baseURL;
+  private baseUrl: string = environment.baseURL+"/name-flow";
 
   public registrationEmailValidation(email: string): Observable<ResponseModel> {
     return this.httpClient.get<ResponseModel>(
